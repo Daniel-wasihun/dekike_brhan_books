@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../models/textbook.dart';
 import '../theme/app_theme.dart';
-import '../utils/subject_icons.dart';
+import '../widgets/pdf_view_factory.dart' as factory;
 
 class PdfViewerScreen extends StatefulWidget {
   final Textbook textbook;
@@ -19,8 +18,6 @@ class PdfViewerScreen extends StatefulWidget {
 }
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
-  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,21 +44,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
             ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.bookmark),
-            onPressed: () {
-              _pdfViewerKey.currentState?.openBookmarkView();
-            },
-          ),
-        ],
       ),
-      body: SfPdfViewer.asset(
-        widget.textbook.file, // This should be 'assets/books/...'
-        key: _pdfViewerKey,
-        canShowScrollHead: false,
-        canShowScrollStatus: false,
-      ),
+      body: factory.createPdfViewer(context, widget.textbook),
     );
   }
 }
