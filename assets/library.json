@@ -1,0 +1,153 @@
+{
+  "app_name": "Sunday School Library",
+  "version": "1.0.0",
+  "description": "Ethiopian Orthodox Tewahedo Sunday School Textbook Library",
+  "subjects": [
+    {
+      "id": "bible_study",
+      "name": "Bible Study",
+      "emoji": "✝️",
+      "description": "Holy scriptures, Bible stories, and Christian theology"
+    },
+    {
+      "id": "liturgy_hymns",
+      "name": "Liturgy & Hymns",
+      "emoji": "🎶",
+      "description": "Liturgical chants, sacred hymns, and holy services"
+    },
+    {
+      "id": "christian_ethics",
+      "name": "Christian Ethics",
+      "emoji": "🕊️",
+      "description": "Moral Christian living, virtues, and community service"
+    },
+    {
+      "id": "church_history",
+      "name": "Church History",
+      "emoji": "⛪",
+      "description": "History of the church, lives of saints, and milestones"
+    },
+    {
+      "id": "prayers_devotionals",
+      "name": "Prayers & Devotionals",
+      "emoji": "🙏",
+      "description": "Daily prayers, meditations, and spiritual devotions"
+    },
+    {
+      "id": "inspirational",
+      "name": "Inspirational",
+      "emoji": "💡",
+      "description": "Motivational and spiritual development books"
+    }
+  ],
+  "grades": [
+    {
+      "grade": 1,
+      "label": "Grade 1",
+      "category": "Beginners Sunday School",
+      "books": []
+    },
+    {
+      "grade": 2,
+      "label": "Grade 2",
+      "category": "Beginners Sunday School",
+      "books": []
+    },
+    {
+      "grade": 3,
+      "label": "Grade 3",
+      "category": "Beginners Sunday School",
+      "books": []
+    },
+    {
+      "grade": 4,
+      "label": "Grade 4",
+      "category": "Beginners Sunday School",
+      "books": []
+    },
+    {
+      "grade": 5,
+      "label": "Grade 5",
+      "category": "Junior Sunday School",
+      "books": []
+    },
+    {
+      "grade": 6,
+      "label": "Grade 6",
+      "category": "Junior Sunday School",
+      "books": []
+    },
+    {
+      "grade": 7,
+      "label": "Grade 7",
+      "category": "Junior Sunday School",
+      "books": []
+    },
+    {
+      "grade": 8,
+      "label": "Grade 8",
+      "category": "Junior Sunday School",
+      "books": []
+    },
+    {
+      "grade": 9,
+      "label": "Grade 9",
+      "category": "Senior Sunday School",
+      "books": [
+        {
+          "id": "habib_giyorgis_9",
+          "title": "Habib Giorgis — Life & Teachings",
+          "subject_id": "church_history",
+          "file": "assets/books/habib_giyorgis.pdf",
+          "file_type": "pdf",
+          "description": "The inspiring life, spiritual writings, and educational legacy of Saint Habib Giorgis Mikael, founder of the modern Ethiopian Orthodox Sunday School movement.",
+          "language": "am",
+          "pages": null,
+          "year": null
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "label": "Grade 10",
+      "category": "Senior Sunday School",
+      "books": [
+        {
+          "id": "modern_orthodox_thinkers_10",
+          "title": "Modern Orthodox Thinkers",
+          "subject_id": "church_history",
+          "file": "assets/books/modern_orthodox_thinkers.pdf",
+          "file_type": "pdf",
+          "description": "A scholarly exploration of modern Eastern Orthodox theological thinkers and their contributions to Christian thought and spirituality.",
+          "language": "en",
+          "pages": null,
+          "year": null
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "label": "Grade 11",
+      "category": "Senior Sunday School",
+      "books": [
+        {
+          "id": "eat_that_frog_11",
+          "title": "Eat That Frog — Amharic Edition",
+          "subject_id": "inspirational",
+          "file": "assets/books/eat_that_frog_amharic.pdf",
+          "file_type": "pdf",
+          "description": "The Amharic translation of the classic self-development book on overcoming procrastination, prioritizing tasks, and achieving your God-given purpose.",
+          "language": "am",
+          "pages": null,
+          "year": null
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "label": "Grade 12",
+      "category": "Senior Sunday School",
+      "books": []
+    }
+  ]
+}
