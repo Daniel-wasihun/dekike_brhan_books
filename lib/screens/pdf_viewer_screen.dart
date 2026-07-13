@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/textbook.dart';
 import '../theme/app_theme.dart';
-import '../widgets/pdf_view_factory.dart' as factory;
+import '../widgets/pdf_view_factory.dart' as pdf_factory;
 
 class PdfViewerScreen extends StatefulWidget {
   final Textbook textbook;
@@ -45,7 +45,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           ],
         ),
       ),
-      body: factory.createPdfViewer(context, widget.textbook),
+      body: pdf_factory.createPdfViewer(context, widget.textbook),
     );
   }
 }
