@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
   google_fonts: ^6.2.1
   provider: ^6.1.2
+  syncfusion_flutter_pdfviewer: ^34.1.30
   url_launcher: ^6.3.1
 
 dev_dependencies:

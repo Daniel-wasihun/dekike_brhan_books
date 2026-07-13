@@ -6,6 +6,7 @@ import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/file_opener.dart';
 import '../utils/subject_icons.dart';
+import 'pdf_viewer_screen.dart';
 
 class GradeDetailScreen extends StatefulWidget {
   final int grade;
@@ -571,7 +572,23 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                         : () async {
                             setState(() => _isOpening = true);
                             try {
-                              await openAssetFile(widget.textbook.file);
+                              if (widget.textbook.fileType.toLowerCase() ==
+                                  'pdf') {
+                                if (context.mounted) {
+                                  Navigator.pop(context); // Close bottom sheet
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => PdfViewerScreen(
+                                        textbook: widget.textbook,
+                                        themeColor: subjectColor,
+                                      ),
+                                    ),
+                                  );
+                                }
+                              } else {
+                                await openAssetFile(widget.textbook.file);
+                              }
                             } catch (e) {
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -604,7 +621,8 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: subjectColor,
                       foregroundColor: Colors.white,
-                      disabledBackgroundColor: subjectColor.withValues(alpha: 0.6),
+                      disabledBackgroundColor:
+                          subjectColor.withValues(alpha: 0.6),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       elevation: 0,
                       shape: RoundedRectangleBorder(
