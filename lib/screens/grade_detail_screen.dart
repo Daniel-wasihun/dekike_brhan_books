@@ -572,6 +572,7 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                         : () async {
                             setState(() => _isOpening = true);
                             try {
+                              provider.addRecentReading(widget.textbook.file);
                               if (widget.textbook.fileType.toLowerCase() ==
                                   'pdf') {
                                 if (context.mounted) {

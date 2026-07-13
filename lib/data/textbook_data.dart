@@ -107,4 +107,13 @@ class LibraryLoader {
             ));
     return gradeLevel.textbooks.map((t) => t.subjectId).toSet().toList();
   }
+
+  /// Find a textbook by its file path.
+  static Textbook? findBookByPath(String path) {
+    try {
+      return allBooks.firstWhere((b) => b.file == path);
+    } catch (_) {
+      return null;
+    }
+  }
 }

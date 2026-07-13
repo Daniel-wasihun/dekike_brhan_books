@@ -1,17 +1,62 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import '../models/textbook.dart';
 import '../data/textbook_data.dart';
+import '../utils/storage.dart' as storage;
 
 class SchoolProvider extends ChangeNotifier {
   String _searchQuery = '';
   String? _selectedSubjectFilter;
   final Set<int> _favoriteGrades = {};
   final Set<String> _bookmarkedBooks = {}; // Uses assetPath as key
+  final List<String> _recentReadings = []; // Uses assetPath
+
+  SchoolProvider() {
+    _loadPersistedData();
+  }
+
+  void _loadPersistedData() {
+    try {
+      final bookmarksJson = storage.getString('bookmarked_books');
+      if (bookmarksJson != null) {
+        final List<dynamic> decoded = jsonDecode(bookmarksJson);
+        _bookmarkedBooks.addAll(decoded.cast<String>());
+      }
+
+      final favoritesJson = storage.getString('favorite_grades');
+      if (favoritesJson != null) {
+        final List<dynamic> decoded = jsonDecode(favoritesJson);
+        _favoriteGrades.addAll(decoded.cast<int>());
+      }
+
+      final recentsJson = storage.getString('recent_readings');
+      if (recentsJson != null) {
+        final List<dynamic> decoded = jsonDecode(recentsJson);
+        _recentReadings.addAll(decoded.cast<String>());
+      }
+    } catch (e) {
+      debugPrint('Error loading persisted data: $e');
+    }
+  }
+
+  void _saveBookmarks() {
+    storage.saveString(
+        'bookmarked_books', jsonEncode(_bookmarkedBooks.toList()));
+  }
+
+  void _saveFavorites() {
+    storage.saveString('favorite_grades', jsonEncode(_favoriteGrades.toList()));
+  }
+
+  void _saveRecents() {
+    storage.saveString('recent_readings', jsonEncode(_recentReadings));
+  }
 
   String get searchQuery => _searchQuery;
   String? get selectedSubjectFilter => _selectedSubjectFilter;
   Set<int> get favoriteGrades => _favoriteGrades;
   Set<String> get bookmarkedBooks => _bookmarkedBooks;
+  List<String> get recentReadings => _recentReadings;
 
   List<GradeLevel> get allGrades => LibraryLoader.allGrades;
   List<Subject> get allSubjects => LibraryLoader.allSubjects;
@@ -32,6 +77,7 @@ class SchoolProvider extends ChangeNotifier {
     } else {
       _favoriteGrades.add(grade);
     }
+    _saveFavorites();
     notifyListeners();
   }
 
@@ -41,7 +87,25 @@ class SchoolProvider extends ChangeNotifier {
     } else {
       _bookmarkedBooks.add(assetPath);
     }
+    _saveBookmarks();
     notifyListeners();
+  }
+
+  void addRecentReading(String assetPath) {
+    _recentReadings.remove(assetPath);
+    _recentReadings.insert(0, assetPath);
+    if (_recentReadings.length > 6) {
+      _recentReadings.removeLast();
+    }
+    _saveRecents();
+    notifyListeners();
+  }
+
+  List<Textbook> get recentReadingsList {
+    return _recentReadings
+        .map((path) => LibraryLoader.findBookByPath(path))
+        .whereType<Textbook>()
+        .toList();
   }
 
   bool isBookmarked(String assetPath) => _bookmarkedBooks.contains(assetPath);

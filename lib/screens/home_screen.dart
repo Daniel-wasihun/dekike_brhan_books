@@ -157,6 +157,18 @@ class HomeScreen extends StatelessWidget {
               ),
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ] else ...[
+            // ─── Daily Recommendation Card ────────────────────
+            SliverToBoxAdapter(
+              child: _DailyQuoteSection(),
+            ),
+
+            // ─── Recent Readings Row ──────────────────────────
+            if (provider.recentReadingsList.isNotEmpty)
+              SliverToBoxAdapter(
+                child: _RecentReadingsSection(
+                    recents: provider.recentReadingsList),
+              ),
+
             // ─── Grade Sections Title ────────────────────────
             SliverToBoxAdapter(
               child: Padding(
@@ -449,6 +461,291 @@ class _SearchTextbookCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+// ─── Daily Devotion Quote Recommendation Card ─────────────────────────────────
+class _DailyQuoteSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
+    final allBooks = LibraryLoader.allBooks;
+
+    if (allBooks.isEmpty) return const SizedBox.shrink();
+
+    final dailyBook = allBooks[dayOfYear % allBooks.length];
+    final gradeColor = AppColors.gradeColors[(dailyBook.grade - 1) % 12];
+    final subjectColor = SubjectIcons.colorFor(dailyBook.subjectId, gradeColor);
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFFFFFAF0),
+              Color(0xFFFFF2DC),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(
+            color: const Color(0xFFF7E2C4),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.03),
+              blurRadius: 12,
+              offset: const Offset(0, 6),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.wb_sunny_rounded,
+                  color: AppColors.accent,
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  'Recommended Lesson of the Day',
+                  style: AppTheme.outfit(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.accent,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              '${dailyBook.title} — Grade ${dailyBook.grade}',
+              style: AppTheme.outfit(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textDark,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              dailyBook.description.isNotEmpty
+                  ? dailyBook.description
+                  : 'Delve into today\'s study focusing on spiritual development and understanding.',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: AppTheme.outfit(
+                fontSize: 12,
+                color: AppColors.textMedium,
+                height: 1.4,
+              ),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GradeDetailScreen(
+                      grade: dailyBook.grade,
+                      initialSelectedSubjectId: dailyBook.subjectId,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.menu_book_rounded, size: 16),
+              label: const Text('Start Reading'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                textStyle: AppTheme.outfit(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Recent Readings Section ──────────────────────────────────────────────────
+class _RecentReadingsSection extends StatelessWidget {
+  final List<Textbook> recents;
+
+  const _RecentReadingsSection({required this.recents});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 20, 24, 12),
+          child: Row(
+            children: [
+              Text(
+                'Continue Reading',
+                style: AppTheme.outfit(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textDark,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                width: 6,
+                height: 6,
+                decoration: const BoxDecoration(
+                  color: AppColors.accent,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 110,
+          child: ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemCount: recents.length,
+            itemBuilder: (context, index) {
+              final book = recents[index];
+              final gradeColor = AppColors.gradeColors[(book.grade - 1) % 12];
+              final subjectColor =
+                  SubjectIcons.colorFor(book.subjectId, gradeColor);
+
+              return Container(
+                width: 260,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.divider, width: 1.5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.02),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(16),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => GradeDetailScreen(
+                            grade: book.grade,
+                            initialSelectedSubjectId: book.subjectId,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              color: subjectColor.withValues(alpha: 0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              SubjectIcons.iconFor(book.subjectId),
+                              color: subjectColor,
+                              size: 20,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  book.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTheme.outfit(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.textDark,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color:
+                                            gradeColor.withValues(alpha: 0.1),
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                      child: Text(
+                                        'Grade ${book.grade}',
+                                        style: AppTheme.outfit(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w700,
+                                          color: gradeColor,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    Text(
+                                      book.fileType.toUpperCase(),
+                                      style: AppTheme.outfit(
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppColors.textLight,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          const Icon(
+                            Icons.chevron_right_rounded,
+                            color: AppColors.textLight,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
