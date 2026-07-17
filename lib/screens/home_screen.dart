@@ -476,8 +476,7 @@ class _DailyQuoteSection extends StatelessWidget {
     if (allBooks.isEmpty) return const SizedBox.shrink();
 
     final dailyBook = allBooks[dayOfYear % allBooks.length];
-    final gradeColor = AppColors.gradeColors[(dailyBook.grade - 1) % 12];
-    final subjectColor = SubjectIcons.colorFor(dailyBook.subjectId, gradeColor);
+
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
