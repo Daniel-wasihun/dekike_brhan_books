@@ -27,7 +27,7 @@ class AboutScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'About Library',
+                        'መዝገብ',
                         style: AppTheme.outfit(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
@@ -35,7 +35,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Sunday School Textbook Registry',
+                        'የሰንበት ትምህርት ቤት መጻሕፍት መዝገብ',
                         style: AppTheme.outfit(
                           fontSize: 14,
                           color: AppColors.textMedium,
@@ -77,7 +77,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Sunday School Library',
+                          'የሰንበት ትምህርት ቤት መዝገብ',
                           style: AppTheme.outfit(
                             color: Colors.white,
                             fontSize: 22,
@@ -86,7 +86,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 6),
                         Text(
-                          'Dedicated to teaching holy scripture, liturgy, church history and spiritual virtues for Ethiopian Orthodox youth.',
+                          'ለኢትዮጵያ ኦርቶዶክስ ተዋህዶ ወጣቶች ቅዱሳት መጻሕፍትን፣ ሥርዓተ ቤተ ክርስቲያንን፣ የቤተ ክርስቲያን ታሪክን እና መንፈሳዊ ሥነ ምግባርን ለማስተማር የተዘጋጀ።',
                           textAlign: TextAlign.center,
                           style: AppTheme.outfit(
                             color: Colors.white70,
@@ -100,14 +100,14 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Stats
-                  const _SectionHeader('Curriculum Overview'),
+                  const _SectionHeader('የትምህርት አጠቃላይ እይታ'),
                   const SizedBox(height: 12),
                   Row(
                     children: [
                       Expanded(
                         child: _StatCard(
                           '${grades.length}',
-                          'Grade Levels',
+                          'የክፍል ደረጃዎች',
                           Icons.layers_rounded,
                           AppColors.primary,
                         ),
@@ -116,7 +116,7 @@ class AboutScreen extends StatelessWidget {
                       Expanded(
                         child: _StatCard(
                           '$totalBooks',
-                          'Total Lessons',
+                          'አጠቃላይ ትምህርቶች',
                           Icons.menu_book_rounded,
                           AppColors.accent,
                         ),
@@ -125,7 +125,7 @@ class AboutScreen extends StatelessWidget {
                       Expanded(
                         child: _StatCard(
                           '${subjects.length}',
-                          'Subjects',
+                          'የትምህርት አይነቶች',
                           Icons.category_rounded,
                           AppColors.gradeColors[3],
                         ),
@@ -135,7 +135,7 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Subjects list from JSON
-                  const _SectionHeader('Subjects'),
+                  const _SectionHeader('የትምህርት አይነቶች'),
                   const SizedBox(height: 12),
                   ...subjects.map((subject) => Container(
                         margin: const EdgeInsets.only(bottom: 8),
@@ -192,7 +192,7 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Grade breakdown from JSON
-                  const _SectionHeader('Grade Breakdown'),
+                  const _SectionHeader('የክፍል ደረጃ ዝርዝር'),
                   const SizedBox(height: 12),
                   ...grades.map((grade) {
                     final color = AppColors.gradeColors[(grade.grade - 1) % 12];
@@ -260,8 +260,8 @@ class AboutScreen extends StatelessWidget {
                               ),
                               child: Text(
                                 grade.textbooks.isEmpty
-                                    ? 'Empty'
-                                    : '${grade.textbooks.length} materials',
+                                    ? 'ባዶ'
+                                    : '${grade.textbooks.length} ትምህርቶች',
                                 style: AppTheme.outfit(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
@@ -297,7 +297,7 @@ class AboutScreen extends StatelessWidget {
                                 color: AppColors.accent, size: 18),
                             const SizedBox(width: 8),
                             Text(
-                              'How to Add Books',
+                              'መጻሕፍትን እንዴት መጨመር ይቻላል',
                               style: AppTheme.outfit(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
@@ -308,11 +308,11 @@ class AboutScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         const _TipStep(
-                            '1', 'Copy your PDF or DOC file to\nassets/books/'),
-                        const _TipStep('2', 'Open assets/library.json'),
+                            '1', 'የፒዲኤፍ ወይም ዶክመንት ፋይሎትን ወደ\nassets/books/ ይቅዱ'),
+                        const _TipStep('2', 'assets/library.json ፋይልን ይክፈቱ'),
                         const _TipStep('3',
-                            'Add an entry under the correct grade\'s "books" array'),
-                        const _TipStep('4', 'Hot-reload or restart the app'),
+                            'በትክክለኛው የክፍል ደረጃ "books" ውስጥ ዝርዝሩን ይጨምሩ'),
+                        const _TipStep('4', 'መተግበሪያውን እንደገና ያስጀምሩ'),
                       ],
                     ),
                   ),

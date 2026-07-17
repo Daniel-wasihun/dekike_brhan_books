@@ -36,7 +36,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
               ),
             ),
             Text(
-              'Grade ${widget.textbook.grade}',
+              'ክፍል ${widget.textbook.grade}',
               style: AppTheme.outfit(
                 color: Colors.white70,
                 fontSize: 12,

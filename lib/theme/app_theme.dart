@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   // Sacred/Spiritual palette: Deep indigo, pure white, gold/amber
@@ -49,8 +48,6 @@ class AppColors {
 }
 
 class AppTheme {
-  /// Global wrapper for GoogleFonts.outfit that automatically adds
-  /// Noto Serif Ethiopic as a fallback to support Amharic characters.
   static TextStyle outfit({
     Color? color,
     double? fontSize,
@@ -59,15 +56,14 @@ class AppTheme {
     double? height,
     double? letterSpacing,
   }) {
-    return GoogleFonts.outfit(
+    return TextStyle(
       color: color,
       fontSize: fontSize,
       fontWeight: fontWeight,
       fontStyle: fontStyle,
       height: height,
       letterSpacing: letterSpacing,
-    ).copyWith(
-      fontFamilyFallback: [GoogleFonts.notoSerifEthiopic().fontFamily!],
+      fontFamilyFallback: const ['Noto Sans Ethiopic', 'Abyssinica SIL', 'Nyala'],
     );
   }
 
@@ -80,7 +76,7 @@ class AppTheme {
           error: AppColors.error,
         ),
         scaffoldBackgroundColor: AppColors.background,
-        textTheme: GoogleFonts.outfitTextTheme().copyWith(
+        textTheme: const TextTheme().copyWith(
           displayLarge: outfit(
             color: AppColors.textDark,
             fontWeight: FontWeight.w700,

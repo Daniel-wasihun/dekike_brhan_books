@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             const SizedBox(width: 12),
                             Text(
-                              'Sunday School',
+                              'ሰንበት ትምህርት ቤት',
                               style: AppTheme.outfit(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          '"Thy Word is a lamp unto my feet"',
+                          '"ሕግህ ለእግሬ መብራት ነው"',
                           style: AppTheme.outfit(
                             color: AppColors.accentLight,
                             fontSize: 15,
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Psalm 119:105',
+                          'መዝሙር 119:105',
                           style: AppTheme.outfit(
                             color: Colors.white38,
                             fontSize: 11,
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
                 child: Text(
-                  'Search Results (${booksToShow.length})',
+                  'የፍለጋ ውጤቶች (${booksToShow.length})',
                   style: AppTheme.outfit(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -134,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.textLight, size: 48),
                       const SizedBox(height: 12),
                       Text(
-                        'No lessons found matching "$query"',
+                        'ለ "$query" የሚመሳሰል ትምህርት አልተገኘም',
                         textAlign: TextAlign.center,
                         style: AppTheme.outfit(color: AppColors.textMedium),
                       ),
@@ -176,7 +176,7 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Browse Lessons by Grade',
+                      'ትምህርቶችን በክፍል ይፈልጉ',
                       style: AppTheme.outfit(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
@@ -240,7 +240,7 @@ class _SearchBar extends StatelessWidget {
         },
         style: AppTheme.outfit(fontSize: 14, color: AppColors.textDark),
         decoration: InputDecoration(
-          hintText: 'Search lessons, subjects or grades...',
+          hintText: 'ትምህርቶችን፣ የትምህርት አይነቶችን ወይም ክፍሎችን ይፈልጉ...',
           hintStyle: AppTheme.outfit(
             fontSize: 14,
             color: AppColors.textLight,
@@ -354,8 +354,8 @@ class _GradeCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       bookCount == 0
-                          ? 'No lessons yet'
-                          : '$bookCount Lesson${bookCount == 1 ? '' : 's'}',
+                          ? 'ምንም ትምህርት የለም'
+                          : '$bookCount ትምህርቶች',
                       style: AppTheme.outfit(
                         fontSize: 11,
                         color: bookCount == 0
@@ -442,7 +442,7 @@ class _SearchTextbookCard extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        'Grade ${textbook.grade} • ${subject?.name ?? textbook.subjectId}',
+                        'ክፍል ${textbook.grade} • ${subject?.name ?? textbook.subjectId}',
                         style: AppTheme.outfit(
                           fontSize: 12,
                           color: AppColors.textMedium,
@@ -516,7 +516,7 @@ class _DailyQuoteSection extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Recommended Lesson of the Day',
+                  'የእለቱ የተመረጠ ትምህርት',
                   style: AppTheme.outfit(
                     fontSize: 13,
                     fontWeight: FontWeight.w700,
@@ -528,7 +528,7 @@ class _DailyQuoteSection extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              '${dailyBook.title} — Grade ${dailyBook.grade}',
+              '${dailyBook.title} — ክፍል ${dailyBook.grade}',
               style: AppTheme.outfit(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
@@ -539,7 +539,7 @@ class _DailyQuoteSection extends StatelessWidget {
             Text(
               dailyBook.description.isNotEmpty
                   ? dailyBook.description
-                  : 'Delve into today\'s study focusing on spiritual development and understanding.',
+                  : 'በመንፈሳዊ እድገት እና ግንዛቤ ላይ በማተኮር የዛሬውን ትምህርት ይመልከቱ።',
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppTheme.outfit(
@@ -562,7 +562,7 @@ class _DailyQuoteSection extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.menu_book_rounded, size: 16),
-              label: const Text('Start Reading'),
+              label: const Text('ማንበብ ይጀምሩ'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -601,7 +601,7 @@ class _RecentReadingsSection extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                'Continue Reading',
+                'ማንበብዎን ይቀጥሉ',
                 style: AppTheme.outfit(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
@@ -707,7 +707,7 @@ class _RecentReadingsSection extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(6),
                                       ),
                                       child: Text(
-                                        'Grade ${book.grade}',
+                                        'ክፍል ${book.grade}',
                                         style: AppTheme.outfit(
                                           fontSize: 10,
                                           fontWeight: FontWeight.w700,

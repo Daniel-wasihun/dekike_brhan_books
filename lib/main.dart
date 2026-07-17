@@ -7,6 +7,7 @@ import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 import 'screens/bookmarks_screen.dart';
 import 'screens/about_screen.dart';
+import 'screens/school_about_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -146,7 +147,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'SUNDAY SCHOOL',
+                      'ሰንበት ትምህርት ቤት',
                       style: AppTheme.outfit(
                           fontSize: 26,
                           color: Colors.white,
@@ -155,7 +156,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Textbook Library',
+                      'የማስተማሪያ መጻሕፍት',
                       style: AppTheme.outfit(
                           fontSize: 16,
                           color: AppColors.accentLight,
@@ -164,7 +165,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      '"Train up a child in the way he should go..."',
+                      '"ልጅን በሚሄድበት መንገድ ምራው..."',
                       style: AppTheme.outfit(
                           color: Colors.white60,
                           fontSize: 13,
@@ -185,7 +186,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 40),
                     Text(
-                      'Proverbs 22:6',
+                      'ምሳሌ 22:6',
                       style: AppTheme.outfit(
                           color: Colors.white38,
                           fontSize: 11,
@@ -216,6 +217,7 @@ class _MainShellState extends State<MainShell> {
     HomeScreen(),
     BookmarksScreen(),
     AboutScreen(),
+    SchoolAboutScreen(),
   ];
 
   @override
@@ -245,25 +247,32 @@ class _MainShellState extends State<MainShell> {
                 _NavItem(
                   icon: Icons.auto_stories_outlined,
                   activeIcon: Icons.auto_stories_rounded,
-                  label: 'Lessons',
+                  label: 'ትምህርቶች',
                   isSelected: _currentIndex == 0,
                   onTap: () => setState(() => _currentIndex = 0),
                 ),
                 _NavItem(
                   icon: Icons.bookmark_outline_rounded,
                   activeIcon: Icons.bookmark_rounded,
-                  label: 'Saved',
+                  label: 'የተቀመጡ',
                   isSelected: _currentIndex == 1,
                   onTap: () => setState(() => _currentIndex = 1),
                   badgeCount:
                       context.watch<SchoolProvider>().bookmarkedBooks.length,
                 ),
                 _NavItem(
-                  icon: Icons.favorite_border_rounded,
-                  activeIcon: Icons.favorite_rounded,
-                  label: 'About',
+                  icon: Icons.library_books_outlined,
+                  activeIcon: Icons.library_books_rounded,
+                  label: 'መዝገብ',
                   isSelected: _currentIndex == 2,
                   onTap: () => setState(() => _currentIndex = 2),
+                ),
+                _NavItem(
+                  icon: Icons.info_outline_rounded,
+                  activeIcon: Icons.info_rounded,
+                  label: 'ስለ እኛ',
+                  isSelected: _currentIndex == 3,
+                  onTap: () => setState(() => _currentIndex = 3),
                 ),
               ],
             ),

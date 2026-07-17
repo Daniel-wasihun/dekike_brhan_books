@@ -40,7 +40,7 @@ class BookmarksScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Saved Lessons',
+                            'የተቀመጡ ትምህርቶች',
                             style: AppTheme.outfit(
                               fontSize: 28,
                               fontWeight: FontWeight.w700,
@@ -48,7 +48,7 @@ class BookmarksScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '${bookmarked.length} lesson${bookmarked.length == 1 ? '' : 's'} saved for quick reading',
+                            'በፍጥነት ለማንበብ ${bookmarked.length} ትምህርቶች ተቀምጠዋል',
                             style: AppTheme.outfit(
                               fontSize: 14,
                               color: AppColors.textMedium,
@@ -84,7 +84,7 @@ class BookmarksScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            'No Saved Lessons',
+                            'ምንም የተቀመጠ ትምህርት የለም',
                             style: AppTheme.outfit(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -93,7 +93,7 @@ class BookmarksScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'Bookmark lessons from any grade\nto quickly find them here.',
+                            'ትምህርቶችን ከየትኛውም ክፍል አስቀምጠው\nበፍጥነት እዚህ ያገኟቸዋል።',
                             textAlign: TextAlign.center,
                             style: AppTheme.outfit(
                               fontSize: 14,
@@ -183,7 +183,7 @@ class BookmarksScreen extends StatelessWidget {
                                           ),
                                           const SizedBox(height: 4),
                                           Text(
-                                            'Grade ${book.grade} • ${subject?.name ?? book.subjectId}',
+                                            'ክፍል ${book.grade} • ${subject?.name ?? book.subjectId}',
                                             style: AppTheme.outfit(
                                               fontSize: 12,
                                               color: AppColors.textMedium,

@@ -146,7 +146,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                 child: Row(
                   children: [
                     _SubjectChip(
-                      label: 'All Lessons',
+                      label: 'ሁሉም ትምህርቶች',
                       icon: Icons.apps_rounded,
                       isSelected: _selectedSubjectId == null,
                       color: color,
@@ -182,7 +182,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                           color: color.withValues(alpha: 0.4), size: 56),
                       const SizedBox(height: 16),
                       Text(
-                        'No lessons added yet',
+                        'ምንም ትምህርት አልተጨመረም',
                         style: AppTheme.outfit(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -191,7 +191,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        'Add PDF or DOC files to assets/books/\nthen update assets/library.json',
+                        'የፒዲኤፍ ወይም ዶክመንት ፋይሎትን ወደ assets/books/ ይጨምሩ\nከዚያም assets/library.json ን ያዘምኑ',
                         textAlign: TextAlign.center,
                         style: AppTheme.outfit(
                           fontSize: 13,
@@ -495,7 +495,7 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'Grade ${widget.textbook.grade} • ${subject?.name ?? widget.textbook.subjectId}',
+                            'ክፍል ${widget.textbook.grade} • ${subject?.name ?? widget.textbook.subjectId}',
                             style: AppTheme.outfit(
                               fontSize: 13,
                               color: AppColors.textMedium,
@@ -512,7 +512,7 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                 // Description
                 if (widget.textbook.description.isNotEmpty) ...[
                   Text(
-                    'About this Lesson',
+                    'ስለዚህ ትምህርት',
                     style: AppTheme.outfit(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -543,20 +543,20 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                     children: [
                       _DetailRow(
                         Icons.insert_drive_file_rounded,
-                        'File',
+                        'ፋይል',
                         widget.textbook.file.split('/').last,
                       ),
                       _DetailRow(
                         Icons.label_rounded,
-                        'Type',
+                        'አይነት',
                         widget.textbook.fileType.toUpperCase(),
                       ),
                       _DetailRow(
                         Icons.language_rounded,
-                        'Language',
+                        'ቋንቋ',
                         widget.textbook.language == 'am'
-                            ? 'Amharic'
-                            : 'English',
+                            ? 'አማርኛ'
+                            : 'እንግሊዘኛ',
                       ),
                     ],
                   ),
@@ -595,7 +595,7 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'Could not open file: ${widget.textbook.file.split('/').last}',
+                                      'ፋይሉን መክፈት አልተቻለም፡ ${widget.textbook.file.split('/').last}',
                                       style: AppTheme.outfit(fontSize: 13),
                                     ),
                                     backgroundColor: AppColors.error,
@@ -618,7 +618,7 @@ class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
                                 strokeWidth: 2, color: Colors.white),
                           )
                         : const Icon(Icons.open_in_new_rounded),
-                    label: Text(_isOpening ? 'Opening...' : 'Open PDF'),
+                    label: Text(_isOpening ? 'በመክፈት ላይ...' : 'ፒዲኤፍ ክፈት'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: subjectColor,
                       foregroundColor: Colors.white,

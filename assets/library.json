@@ -1,106 +1,106 @@
 {
-  "app_name": "Sunday School Library",
+  "app_name": "ሰንበት ትምህርት ቤት መዝገብ",
   "version": "1.0.0",
-  "description": "Ethiopian Orthodox Tewahedo Sunday School Textbook Library",
+  "description": "የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ሰንበት ትምህርት ቤት የማስተማሪያ መጻህፍት መዝገብ",
   "subjects": [
     {
       "id": "bible_study",
-      "name": "Bible Study",
+      "name": "የመጽሐፍ ቅዱስ ጥናት",
       "emoji": "✝️",
-      "description": "Holy scriptures, Bible stories, and Christian theology"
+      "description": "ቅዱሳት መጻሕፍት፣ የመጽሐፍ ቅዱስ ታሪኮች፣ እና ክርስቲያናዊ ትምህርቶች"
     },
     {
       "id": "liturgy_hymns",
-      "name": "Liturgy & Hymns",
+      "name": "ሥርዓተ ቤተ ክርስቲያን እና መዝሙር",
       "emoji": "🎶",
-      "description": "Liturgical chants, sacred hymns, and holy services"
+      "description": "መንፈሳዊ መዝሙሮች፣ የዜማ ትምህርቶች እና የቤተ ክርስቲያን ሥርዓት"
     },
     {
       "id": "christian_ethics",
-      "name": "Christian Ethics",
+      "name": "ክርስቲያናዊ ሥነ ምግባር",
       "emoji": "🕊️",
-      "description": "Moral Christian living, virtues, and community service"
+      "description": "መንፈሳዊ ሕይወት፣ መልካም ሥነ ምግባር እና መንፈሳዊ አገልግሎት"
     },
     {
       "id": "church_history",
-      "name": "Church History",
+      "name": "የቤተ ክርስቲያን ታሪክ",
       "emoji": "⛪",
-      "description": "History of the church, lives of saints, and milestones"
+      "description": "የቤተ ክርስቲያን ታሪክ፣ የቅዱሳን ታሪክ እና ጉልህ ኩነቶች"
     },
     {
       "id": "prayers_devotionals",
-      "name": "Prayers & Devotionals",
+      "name": "ጸሎት እና አምልኮ",
       "emoji": "🙏",
-      "description": "Daily prayers, meditations, and spiritual devotions"
+      "description": "የዘወትር ጸሎቶች፣ መንፈሳዊ ትምህርቶች እና አምልኮ"
     },
     {
       "id": "inspirational",
-      "name": "Inspirational",
+      "name": "መንፈሳዊ ምክሮች",
       "emoji": "💡",
-      "description": "Motivational and spiritual development books"
+      "description": "መንፈሳዊ እድገት እና አነቃቂ መጻሕፍት"
     }
   ],
   "grades": [
     {
       "grade": 1,
-      "label": "Grade 1",
-      "category": "Beginners Sunday School",
+      "label": "፩ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 2,
-      "label": "Grade 2",
-      "category": "Beginners Sunday School",
+      "label": "፪ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 3,
-      "label": "Grade 3",
-      "category": "Beginners Sunday School",
+      "label": "፫ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 4,
-      "label": "Grade 4",
-      "category": "Beginners Sunday School",
+      "label": "፬ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 5,
-      "label": "Grade 5",
-      "category": "Junior Sunday School",
+      "label": "፭ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 6,
-      "label": "Grade 6",
-      "category": "Junior Sunday School",
+      "label": "፮ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 7,
-      "label": "Grade 7",
-      "category": "Junior Sunday School",
+      "label": "፯ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 8,
-      "label": "Grade 8",
-      "category": "Junior Sunday School",
+      "label": "፰ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": []
     },
     {
       "grade": 9,
-      "label": "Grade 9",
-      "category": "Senior Sunday School",
+      "label": "፱ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
       "books": [
         {
           "id": "habib_giyorgis_9",
-          "title": "Habib Giorgis — Life & Teachings",
+          "title": "ቅዱስ ሐቢብ ጊዮርጊስ — ሕይወቱና ትምህርቱ",
           "subject_id": "church_history",
           "file": "assets/books/habib_giyorgis.pdf",
           "file_type": "pdf",
-          "description": "The inspiring life, spiritual writings, and educational legacy of Saint Habib Giorgis Mikael, founder of the modern Ethiopian Orthodox Sunday School movement.",
+          "description": "የዘመናዊ የኢትዮጵያ ኦርቶዶክስ ሰንበት ትምህርት ቤት መስራች የሆኑት የቅዱስ ሐቢብ ጊዮርጊስ ሚካኤል መንፈሳዊ ሕይወት እና ትምህርታዊ ውርስ።",
           "language": "am",
           "pages": null,
           "year": null
@@ -109,17 +109,17 @@
     },
     {
       "grade": 10,
-      "label": "Grade 10",
-      "category": "Senior Sunday School",
+      "label": "፲ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
       "books": [
         {
           "id": "modern_orthodox_thinkers_10",
-          "title": "Modern Orthodox Thinkers",
+          "title": "ዘመናዊ የኦርቶዶክስ አስተማሪዎች",
           "subject_id": "church_history",
           "file": "assets/books/modern_orthodox_thinkers.pdf",
           "file_type": "pdf",
-          "description": "A scholarly exploration of modern Eastern Orthodox theological thinkers and their contributions to Christian thought and spirituality.",
-          "language": "en",
+          "description": "የዘመናዊ ምሥራቃዊ ኦርቶዶክስ የነገረ መለኮት አሳቢያን እና ለክርስቲያናዊ አስተሳሰብ ያበረከቱት አስተዋጽኦ።",
+          "language": "am",
           "pages": null,
           "year": null
         }
@@ -127,16 +127,16 @@
     },
     {
       "grade": 11,
-      "label": "Grade 11",
-      "category": "Senior Sunday School",
+      "label": "፲፩ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
       "books": [
         {
           "id": "eat_that_frog_11",
-          "title": "Eat That Frog — Amharic Edition",
+          "title": "Eat That Frog — የአማርኛ ትርጉም",
           "subject_id": "inspirational",
           "file": "assets/books/eat_that_frog_amharic.pdf",
           "file_type": "pdf",
-          "description": "The Amharic translation of the classic self-development book on overcoming procrastination, prioritizing tasks, and achieving your God-given purpose.",
+          "description": "በጊዜ አጠቃቀም፣ ቅድሚያ በሚሰጣቸው ጉዳዮች እና እግዚአብሔር የሰጠንን ዓላማ ማሳካት ላይ ያተኮረ መጽሐፍ።",
           "language": "am",
           "pages": null,
           "year": null
@@ -145,8 +145,8 @@
     },
     {
       "grade": 12,
-      "label": "Grade 12",
-      "category": "Senior Sunday School",
+      "label": "፲፪ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
       "books": []
     }
   ]

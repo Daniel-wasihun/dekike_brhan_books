@@ -17,7 +17,7 @@ Widget createPdfViewer(BuildContext context, Textbook textbook) {
           ),
           const SizedBox(height: 16),
           Text(
-            'PDF View Optimized',
+            'በተንቀሳቃሽ ስልክ ለማንበብ የተመቻቸ',
             style: AppTheme.outfit(
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -26,7 +26,7 @@ Widget createPdfViewer(BuildContext context, Textbook textbook) {
           ),
           const SizedBox(height: 8),
           Text(
-            'To view this document on mobile, open it in your system\'s external reader.',
+            'ይህን ዶክመንት በተንቀሳቃሽ ስልክዎ ለማንበብ፣ እባክዎ በሌላ አንባቢ መተግበሪያ ይክፈቱት።',
             textAlign: TextAlign.center,
             style: AppTheme.outfit(
               fontSize: 13,
@@ -37,7 +37,7 @@ Widget createPdfViewer(BuildContext context, Textbook textbook) {
           ElevatedButton.icon(
             onPressed: () => openAssetFile(textbook.file),
             icon: const Icon(Icons.open_in_new_rounded),
-            label: const Text('Open Externally'),
+            label: const Text('በሌላ መተግበሪያ ክፈት'),
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.primary,
               foregroundColor: Colors.white,
