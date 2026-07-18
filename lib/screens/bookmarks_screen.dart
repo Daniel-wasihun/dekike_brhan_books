@@ -42,6 +42,18 @@ class BookmarksScreen extends StatelessWidget {
                 pinned: true,
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      provider.isDarkMode
+                          ? Icons.light_mode_rounded
+                          : Icons.dark_mode_rounded,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => provider.toggleThemeMode(),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     decoration: const BoxDecoration(

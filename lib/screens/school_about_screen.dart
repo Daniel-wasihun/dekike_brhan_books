@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../theme/app_theme.dart';
+import '../data/school_provider.dart';
 
 class SchoolAboutScreen extends StatelessWidget {
   const SchoolAboutScreen({super.key});
@@ -23,8 +25,9 @@ class SchoolAboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<SchoolProvider>();
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.bg,
       body: CustomScrollView(
         slivers: [
           // ─── Gradient Hero Header ─────────────────────────────
@@ -34,6 +37,18 @@ class SchoolAboutScreen extends StatelessWidget {
             stretch: true,
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  provider.isDarkMode
+                      ? Icons.light_mode_rounded
+                      : Icons.dark_mode_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () => provider.toggleThemeMode(),
+              ),
+              const SizedBox(width: 8),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
@@ -127,6 +142,7 @@ class SchoolAboutScreen extends StatelessWidget {
                 children: [
                   // ── Mission Statement ────────────────────────
                   _card(
+                    context,
                     child: Column(
                       children: [
                         const Icon(Icons.format_quote_rounded,
@@ -138,7 +154,7 @@ class SchoolAboutScreen extends StatelessWidget {
                           style: AppTheme.outfit(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
-                            color: AppColors.textDark,
+                            color: context.textDarkColor,
                             height: 1.6,
                           ),
                         ),
@@ -147,7 +163,7 @@ class SchoolAboutScreen extends StatelessWidget {
                           'ምሳሌ 22:6',
                           style: AppTheme.outfit(
                             fontSize: 12,
-                            color: AppColors.textLight,
+                            color: context.textLightColor,
                           ),
                         ),
                       ],
@@ -159,11 +175,12 @@ class SchoolAboutScreen extends StatelessWidget {
                   _SectionTitle(title: 'ስለ ሰ/ት/ቤታችን'),
                   const SizedBox(height: 12),
                   _card(
+                    context,
                     child: Text(
                       'ደቂቀ ብርሃን ሰ/ት/ቤት የሚንቀሳቀሰው በኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተ ክርስቲያን ሥር ሲሆን፣ ሸገር ከተማ ኩራጂዳ ክፍለ ከተማ ውስጥ በምትገኘው በመንበረ ብርሃን ቅ/ሥላሴ ቤተ ክርስቲያን ስር ይሰራል። ዓላማው ወጣቱ ትውልድ ቅዱሳት መጻሕፍትን፣ የቤተ ክርስቲያን ሥርዓቶችን፣ ታሪክን፣ ዜማን እና ክርስቲያናዊ ሥነ ምግባርን ጠለቅ ብሎ እንዲማር ማድረግ ነው። ይህ ዲጂታል መጽሐፍ ቤት ተማሪዎች ትምህርቶቻቸውን ዩዲ ላይ ሆኖ ቀላሉ ሁኔታ እንዲያነቡ የተሰናዳ ነው።',
                       style: AppTheme.outfit(
                         fontSize: 14,
-                        color: AppColors.textMedium,
+                        color: context.textMediumColor,
                         height: 1.7,
                       ),
                     ),
@@ -174,6 +191,7 @@ class SchoolAboutScreen extends StatelessWidget {
                   _SectionTitle(title: 'የቤተ ክርስቲያን መረጃ'),
                   const SizedBox(height: 12),
                   _card(
+                    context,
                     child: Column(
                       children: _infoItems
                           .map((item) => _InfoRow(
@@ -189,18 +207,15 @@ class SchoolAboutScreen extends StatelessWidget {
                   // ── Pillars of Teaching ──────────────────────
                   _SectionTitle(title: 'ዋና ዋና የትምህርት ዘርፎች'),
                   const SizedBox(height: 12),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    childAspectRatio: 2.0,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
+                  Column(
                     children: _pillars
-                        .map((p) => _PillarCard(
-                              icon: p.icon,
-                              title: p.title,
-                              desc: p.desc,
+                        .map((p) => Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: _PillarCard(
+                                icon: p.icon,
+                                title: p.title,
+                                desc: p.desc,
+                              ),
                             ))
                         .toList(),
                   ),
@@ -225,7 +240,7 @@ class SchoolAboutScreen extends StatelessWidget {
                             'ሁሉም ይዘቶች ከ assets/library.json ፋይል ይጫናሉ። አዲስ መጽሐፍ ለማከል ፋይሉን ብቻ ያዘምኑ።',
                             style: AppTheme.outfit(
                               fontSize: 12,
-                              color: AppColors.textMedium,
+                              color: context.textMediumColor,
                               height: 1.4,
                             ),
                           ),
@@ -242,14 +257,14 @@ class SchoolAboutScreen extends StatelessWidget {
     );
   }
 
-  Widget _card({required Widget child}) {
+  Widget _card(BuildContext context, {required Widget child}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        border: Border.all(color: context.dividerColor, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.03),
@@ -286,7 +301,7 @@ class _SectionTitle extends StatelessWidget {
           style: AppTheme.outfit(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppColors.textDark,
+            color: context.textDarkColor,
           ),
         ),
       ],
@@ -323,14 +338,14 @@ class _InfoRow extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: AppTheme.outfit(fontSize: 11, color: AppColors.textLight),
+                  style: AppTheme.outfit(fontSize: 11, color: context.textLightColor),
                 ),
                 Text(
                   value,
                   style: AppTheme.outfit(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
               ],
@@ -352,23 +367,23 @@ class _PillarCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        color: context.surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: context.dividerColor, width: 1.5),
       ),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(7),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               color: AppColors.primary.withValues(alpha: 0.08),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: AppColors.primary, size: 16),
+            child: Icon(icon, color: AppColors.primary, size: 24),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -377,17 +392,17 @@ class _PillarCard extends StatelessWidget {
                 Text(
                   title,
                   style: AppTheme.outfit(
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   desc,
-                  style: AppTheme.outfit(fontSize: 10, color: AppColors.textLight),
-                  maxLines: 1,
+                  style: AppTheme.outfit(fontSize: 13, color: context.textLightColor),
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ],

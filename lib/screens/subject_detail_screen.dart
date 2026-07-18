@@ -109,9 +109,9 @@ class SubjectDetailScreen extends StatelessWidget {
                     return Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: context.surfaceColor,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: AppColors.divider, width: 1.5),
+                        border: Border.all(color: context.dividerColor, width: 1.5),
                       ),
                       child: Material(
                         color: Colors.transparent,
@@ -136,9 +136,9 @@ class SubjectDetailScreen extends StatelessWidget {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(book.title, style: AppTheme.outfit(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                                      Text(book.title, style: AppTheme.outfit(fontSize: 14, fontWeight: FontWeight.w600, color: context.textDarkColor)),
                                       if (book.description.isNotEmpty)
-                                        Text(book.description, maxLines: 1, overflow: TextOverflow.ellipsis, style: AppTheme.outfit(fontSize: 11, color: AppColors.textLight)),
+                                        Text(book.description, maxLines: 1, overflow: TextOverflow.ellipsis, style: AppTheme.outfit(fontSize: 11, color: context.textLightColor)),
                                     ],
                                   ),
                                 ),

@@ -156,7 +156,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                         style: AppTheme.outfit(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -165,7 +165,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                         textAlign: TextAlign.center,
                         style: AppTheme.outfit(
                           fontSize: 14,
-                          color: AppColors.textLight,
+                          color: context.textLightColor,
                           height: 1.5,
                         ),
                       ),
@@ -230,9 +230,9 @@ class _TextbookListItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        border: Border.all(color: context.dividerColor, width: 1.5),
       ),
       child: Material(
         color: Colors.transparent,
@@ -264,7 +264,7 @@ class _TextbookListItem extends StatelessWidget {
                         style: AppTheme.outfit(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -276,7 +276,7 @@ class _TextbookListItem extends StatelessWidget {
                             subject?.name ?? textbook.subjectId,
                             style: AppTheme.outfit(
                               fontSize: 12,
-                              color: AppColors.textLight,
+                              color: context.textLightColor,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -309,7 +309,7 @@ class _TextbookListItem extends StatelessWidget {
                         ? Icons.bookmark_rounded
                         : Icons.bookmark_border_rounded,
                     color:
-                        isBookmarked ? AppColors.accent : AppColors.textLight,
+                        isBookmarked ? AppColors.accent : context.textLightColor,
                   ),
                   onPressed: () => provider.toggleBookmark(textbook.assetPath),
                 ),

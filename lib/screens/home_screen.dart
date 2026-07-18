@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
                   style: AppTheme.outfit(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textDark,
+                    color: context.textDarkColor,
                   ),
                 ),
               ),
@@ -142,13 +142,13 @@ class HomeScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 40, horizontal: 24),
                   child: Column(
                     children: [
-                      const Icon(Icons.search_off_rounded,
-                          color: AppColors.textLight, size: 48),
+                      Icon(Icons.search_off_rounded,
+                          color: context.textLightColor, size: 48),
                       const SizedBox(height: 12),
                       Text(
                         'ለ "$query" የሚመሳሰል ትምህርት አልተገኘም',
                         textAlign: TextAlign.center,
-                        style: AppTheme.outfit(color: AppColors.textMedium),
+                        style: AppTheme.outfit(color: context.textMediumColor),
                       ),
                     ],
                   ),
@@ -192,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                       style: AppTheme.outfit(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.textDark,
+                        color: context.textDarkColor,
                       ),
                     ),
                     const Spacer(),
@@ -260,9 +260,9 @@ class _SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        border: Border.all(color: context.dividerColor, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -275,12 +275,12 @@ class _SearchBar extends StatelessWidget {
         onChanged: (value) {
           context.read<SchoolProvider>().setSearchQuery(value);
         },
-        style: AppTheme.outfit(fontSize: 14, color: AppColors.textDark),
+        style: AppTheme.outfit(fontSize: 14, color: context.textDarkColor),
         decoration: InputDecoration(
           hintText: 'ትምህርቶችን፣ የትምህርት አይነቶችን ወይም ክፍሎችን ይፈልጉ...',
           hintStyle: AppTheme.outfit(
             fontSize: 14,
-            color: AppColors.textLight,
+            color: context.textLightColor,
           ),
           prefixIcon: const Icon(Icons.search_rounded,
               color: AppColors.accent, size: 22),
@@ -304,7 +304,7 @@ class _GradeCard extends StatelessWidget {
     final bookCount = gradeLevel.textbooks.length;
 
     return Material(
-      color: Colors.white,
+      color: context.surfaceColor,
       borderRadius: BorderRadius.circular(20),
       elevation: 0,
       child: InkWell(
@@ -320,7 +320,7 @@ class _GradeCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.divider, width: 1.5),
+            border: Border.all(color: context.dividerColor, width: 1.5),
           ),
           child: Stack(
             children: [
@@ -363,19 +363,19 @@ class _GradeCard extends StatelessWidget {
                         ),
                         const Spacer(),
                         Icon(Icons.chevron_right_rounded,
-                            color: color.withValues(alpha: 0.5), size: 18),
+                            color: color.withValues(alpha: 0.6), size: 22),
                       ],
                     ),
                     const Spacer(),
                     // Book icon
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: color.withValues(alpha: 0.08),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(Icons.menu_book_outlined,
-                          color: color, size: 24),
+                          color: color, size: 28),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -384,7 +384,7 @@ class _GradeCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.outfit(
                         fontSize: 12,
-                        color: AppColors.textMedium,
+                        color: context.textMediumColor,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -396,8 +396,8 @@ class _GradeCard extends StatelessWidget {
                       style: AppTheme.outfit(
                         fontSize: 11,
                         color: bookCount == 0
-                            ? AppColors.textHint
-                            : AppColors.textLight,
+                            ? context.textHintColor
+                            : context.textLightColor,
                       ),
                     ),
                   ],
@@ -422,7 +422,7 @@ class _GradeListCard extends StatelessWidget {
     final bookCount = gradeLevel.textbooks.length;
 
     return Material(
-      color: Colors.white,
+      color: context.surfaceColor,
       borderRadius: BorderRadius.circular(16),
       elevation: 0,
       child: InkWell(
@@ -438,7 +438,7 @@ class _GradeListCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: AppColors.divider, width: 1.5),
+            border: Border.all(color: context.dividerColor, width: 1.5),
           ),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -479,7 +479,7 @@ class _GradeListCard extends StatelessWidget {
                             bookCount == 0 ? 'ምንም ትምህርት የለም' : '$bookCount ትምህርቶች',
                             style: AppTheme.outfit(
                               fontSize: 11,
-                              color: bookCount == 0 ? AppColors.textHint : AppColors.textLight,
+                              color: bookCount == 0 ? context.textHintColor : context.textLightColor,
                             ),
                           ),
                         ],
@@ -491,7 +491,7 @@ class _GradeListCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: AppTheme.outfit(
                           fontSize: 14,
-                          color: AppColors.textMedium,
+                          color: context.textMediumColor,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -521,9 +521,9 @@ class _SearchTextbookCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        border: Border.all(color: context.dividerColor, width: 1.5),
       ),
       child: Material(
         color: Colors.transparent,
@@ -560,7 +560,7 @@ class _SearchTextbookCard extends StatelessWidget {
                         style: AppTheme.outfit(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -570,15 +570,15 @@ class _SearchTextbookCard extends StatelessWidget {
                         'ክፍል ${textbook.grade} • ${subject?.name ?? textbook.subjectId}',
                         style: AppTheme.outfit(
                           fontSize: 12,
-                          color: AppColors.textMedium,
+                          color: context.textMediumColor,
                         ),
                       ),
                     ],
                   ),
                 ),
-                const Icon(
+                Icon(
                   Icons.arrow_forward_ios_rounded,
-                  color: AppColors.textLight,
+                  color: context.textLightColor,
                   size: 14,
                 ),
               ],
@@ -602,28 +602,20 @@ class _DailyQuoteSection extends StatelessWidget {
 
     final dailyBook = allBooks[dayOfYear % allBooks.length];
 
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [
-              Color(0xFFFFFAF0),
-              Color(0xFFFFF2DC),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: context.surfaceColor,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: const Color(0xFFF7E2C4),
+            color: context.dividerColor,
             width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withValues(alpha: 0.03),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 12,
               offset: const Offset(0, 6),
             ),
@@ -634,10 +626,10 @@ class _DailyQuoteSection extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.wb_sunny_rounded,
                   color: AppColors.accent,
-                  size: 20,
+                  size: 24,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -657,7 +649,7 @@ class _DailyQuoteSection extends StatelessWidget {
               style: AppTheme.outfit(
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textDark,
+                color: context.textDarkColor,
               ),
             ),
             const SizedBox(height: 6),
@@ -669,14 +661,14 @@ class _DailyQuoteSection extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: AppTheme.outfit(
                 fontSize: 12,
-                color: AppColors.textMedium,
+                color: context.textMediumColor,
                 height: 1.4,
               ),
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
               onPressed: () => openTextbook(context, dailyBook),
-              icon: const Icon(Icons.menu_book_rounded, size: 16),
+              icon: const Icon(Icons.menu_book_rounded, size: 18),
               label: const Text('ማንበብ ይጀምሩ'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
@@ -720,7 +712,7 @@ class _RecentReadingsSection extends StatelessWidget {
                 style: AppTheme.outfit(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textDark,
+                  color: context.textDarkColor,
                 ),
               ),
               const SizedBox(width: 8),
@@ -751,9 +743,9 @@ class _RecentReadingsSection extends StatelessWidget {
                 width: 260,
                 margin: const EdgeInsets.symmetric(horizontal: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: context.surfaceColor,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.divider, width: 1.5),
+                  border: Border.all(color: context.dividerColor, width: 1.5),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withValues(alpha: 0.02),
@@ -797,7 +789,7 @@ class _RecentReadingsSection extends StatelessWidget {
                                   style: AppTheme.outfit(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.textDark,
+                                    color: context.textDarkColor,
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -826,7 +818,7 @@ class _RecentReadingsSection extends StatelessWidget {
                                       style: AppTheme.outfit(
                                         fontSize: 9,
                                         fontWeight: FontWeight.w500,
-                                        color: AppColors.textLight,
+                                        color: context.textLightColor,
                                       ),
                                     ),
                                   ],
@@ -835,9 +827,9 @@ class _RecentReadingsSection extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          const Icon(
+                          Icon(
                             Icons.chevron_right_rounded,
-                            color: AppColors.textLight,
+                            color: context.textLightColor,
                             size: 18,
                           ),
                         ],

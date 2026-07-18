@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../theme/app_theme.dart';
+import '../data/school_provider.dart';
 import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
@@ -14,9 +16,10 @@ class AboutScreen extends StatelessWidget {
     final grades = LibraryLoader.allGrades;
     final subjects = LibraryLoader.allSubjects;
     final totalBooks = LibraryLoader.totalBooks;
+    final provider = context.watch<SchoolProvider>();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: context.bg,
       body: CustomScrollView(
         slivers: [
           // ─── App Bar ─────────────────────────────────────────
@@ -25,6 +28,18 @@ class AboutScreen extends StatelessWidget {
             pinned: true,
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
+            actions: [
+              IconButton(
+                icon: Icon(
+                  provider.isDarkMode
+                      ? Icons.light_mode_rounded
+                      : Icons.dark_mode_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () => provider.toggleThemeMode(),
+              ),
+              const SizedBox(width: 8),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
@@ -110,9 +125,9 @@ class AboutScreen extends StatelessWidget {
                   return Container(
                     margin: const EdgeInsets.only(bottom: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: context.surfaceColor,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.divider, width: 1.5),
+                      border: Border.all(color: context.dividerColor, width: 1.5),
                     ),
                     child: Material(
                       color: Colors.transparent,
@@ -157,14 +172,14 @@ class AboutScreen extends StatelessWidget {
                                       style: AppTheme.outfit(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
-                                        color: AppColors.textDark,
+                                        color: context.textDarkColor,
                                       ),
                                     ),
                                     Text(
                                       grade.category,
                                       style: AppTheme.outfit(
                                         fontSize: 11,
-                                        color: AppColors.textLight,
+                                        color: context.textLightColor,
                                       ),
                                     ),
                                   ],
@@ -219,7 +234,7 @@ class AboutScreen extends StatelessWidget {
                             style: AppTheme.outfit(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.textDark,
+                              color: context.textDarkColor,
                             ),
                           ),
                         ],
@@ -258,9 +273,9 @@ class _ClickableSubjectCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: context.surfaceColor,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.divider, width: 1.5),
+        border: Border.all(color: context.dividerColor, width: 1.5),
       ),
       child: Material(
         color: Colors.transparent,
@@ -297,14 +312,14 @@ class _ClickableSubjectCard extends StatelessWidget {
                         style: AppTheme.outfit(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.textDark,
+                          color: context.textDarkColor,
                         ),
                       ),
                       Text(
                         bookCount == 0 ? 'ምንም ፋይል የለም' : '$bookCount መጻሕፍት',
                         style: AppTheme.outfit(
                           fontSize: 11,
-                          color: bookCount == 0 ? AppColors.textHint : AppColors.textLight,
+                          color: bookCount == 0 ? context.textHintColor : context.textLightColor,
                         ),
                       ),
                     ],
@@ -338,7 +353,7 @@ class _SectionHeader extends StatelessWidget {
           style: AppTheme.outfit(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: AppColors.textDark,
+            color: context.textDarkColor,
           ),
         ),
       ],
@@ -361,9 +376,9 @@ class _StatCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.surfaceColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.divider, width: 1.5),
+          border: Border.all(color: context.dividerColor, width: 1.5),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -382,12 +397,12 @@ class _StatCard extends StatelessWidget {
               style: AppTheme.outfit(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
-                color: AppColors.textDark,
+                color: context.textDarkColor,
               ),
             ),
             Text(
               label,
-              style: AppTheme.outfit(fontSize: 10, color: AppColors.textLight),
+              style: AppTheme.outfit(fontSize: 10, color: context.textLightColor),
             ),
           ],
         ),
@@ -408,7 +423,7 @@ class _EmptyState extends StatelessWidget {
       child: Center(
         child: Text(
           message,
-          style: AppTheme.outfit(fontSize: 13, color: AppColors.textLight),
+          style: AppTheme.outfit(fontSize: 13, color: context.textLightColor),
           textAlign: TextAlign.center,
         ),
       ),
@@ -440,15 +455,15 @@ class _TipStep extends StatelessWidget {
             child: Center(
               child: Text(
                 step,
-                style: const TextStyle(
-                    color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    color: context.surfaceColor, fontSize: 11, fontWeight: FontWeight.w700),
               ),
             ),
           ),
           Expanded(
             child: Text(
               text,
-              style: AppTheme.outfit(fontSize: 13, color: AppColors.textMedium, height: 1.4),
+              style: AppTheme.outfit(fontSize: 13, color: context.textMediumColor, height: 1.4),
             ),
           ),
         ],
