@@ -67,11 +67,11 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          // ─── Hero Header ─────────────────────────────────
+          // ─── Hero Header ─────────────────────────────────────────
           SliverAppBar(
             expandedHeight: 200,
             pinned: true,
-            backgroundColor: color,
+            backgroundColor: AppColors.primaryDark,
             foregroundColor: Colors.white,
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18),
@@ -97,9 +97,13 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
             ],
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [color.withValues(alpha: 0.95), color],
+                    colors: [
+                      Color(0xFF1E1F4B),
+                      Color(0xFF2A2B5F),
+                      Color(0xFF3B3C83),
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -111,6 +115,16 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        // Grade color accent bar
+                        Container(
+                          width: 40,
+                          height: 4,
+                          margin: const EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
                         Text(
                           gradeLevel.label,
                           style: AppTheme.outfit(
@@ -122,7 +136,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
                         Text(
                           gradeLevel.category,
                           style: AppTheme.outfit(
-                            color: Colors.white.withValues(alpha: 0.8),
+                            color: Colors.white.withValues(alpha: 0.7),
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
                           ),

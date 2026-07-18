@@ -22,32 +22,45 @@ class AboutScreen extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 130,
             pinned: true,
-            backgroundColor: AppColors.background,
-            elevation: 0,
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
-              background: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'መዝገብ',
-                        style: AppTheme.outfit(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textDark,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'የሰንበት ትምህርት ቤት የመጻሕፍት ዝርዝር',
-                        style: AppTheme.outfit(
-                          fontSize: 14,
-                          color: AppColors.textMedium,
-                        ),
-                      ),
+              background: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF1E1F4B),
+                      Color(0xFF2A2B5F),
+                      Color(0xFF3B3C83),
                     ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'መዝገብ',
+                          style: AppTheme.outfit(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          'የሰንበት ትምህርት ቤት የመጻሕፍት ዝርዝር',
+                          style: AppTheme.outfit(
+                            fontSize: 14,
+                            color: Colors.white.withValues(alpha: 0.7),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

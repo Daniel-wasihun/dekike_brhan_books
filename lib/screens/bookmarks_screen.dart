@@ -31,30 +31,44 @@ class BookmarksScreen extends StatelessWidget {
               SliverAppBar(
                 expandedHeight: 140,
                 pinned: true,
-                backgroundColor: AppColors.background,
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'የተቀመጡ ትምህርቶች',
-                            style: AppTheme.outfit(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textDark,
-                            ),
-                          ),
-                          Text(
-                            'በፍጥነት ለማንበብ ${bookmarked.length} ትምህርቶች ተቀምጠዋል',
-                            style: AppTheme.outfit(
-                              fontSize: 14,
-                              color: AppColors.textMedium,
-                            ),
-                          ),
+                  background: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF1E1F4B),
+                          Color(0xFF2A2B5F),
+                          Color(0xFF3B3C83),
                         ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'የተቀመጡ ትምህርቶች',
+                              style: AppTheme.outfit(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'በፍጥነት ለማንበብ ${bookmarked.length} ትምህርቶች ተቀምጠዋል',
+                              style: AppTheme.outfit(
+                                fontSize: 14,
+                                color: Colors.white.withValues(alpha: 0.7),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
