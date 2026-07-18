@@ -4,6 +4,7 @@ import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
 import 'grade_detail_screen.dart';
+import 'subject_detail_screen.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -92,14 +93,10 @@ class AboutScreen extends StatelessWidget {
                 else
                   ...subjects.map((subject) {
                     final color = SubjectIcons.colorFor(subject.id, AppColors.primary);
-                    final booksInSubject = LibraryLoader.allGrades
-                        .expand((g) => g.textbooks)
-                        .where((b) => b.subjectId == subject.id)
-                        .length;
                     return _ClickableSubjectCard(
                       subject: subject,
                       color: color,
-                      bookCount: booksInSubject,
+                      bookCount: subject.textbooks.length,
                     );
                   }),
                 const SizedBox(height: 28),
@@ -176,7 +173,7 @@ class AboutScreen extends StatelessWidget {
                               Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                                 decoration: BoxDecoration(
-                                  color: isEmpty ? AppColors.divider : color.withValues(alpha: 0.1),
+                                  color: isEmpty ? context.dividerColor : (context.isDark ? AppColors.accent.withValues(alpha: 0.15) : AppColors.primary.withValues(alpha: 0.08)),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Text(
@@ -184,7 +181,7 @@ class AboutScreen extends StatelessWidget {
                                   style: AppTheme.outfit(
                                     fontSize: 11,
                                     fontWeight: FontWeight.w600,
-                                    color: isEmpty ? AppColors.textHint : color,
+                                    color: isEmpty ? context.textHintColor : (context.isDark ? AppColors.accent : AppColors.primary),
                                   ),
                                 ),
                               ),
@@ -271,37 +268,12 @@ class _ClickableSubjectCard extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(14),
           onTap: () {
-            // Filter grades that have books in this subject
-            final gradesWithSubject = LibraryLoader.allGrades
-                .where((g) => g.textbooks.any((b) => b.subjectId == subject.id))
-                .toList();
-
-            if (gradesWithSubject.isEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'ይህ ትምህርት አሁን ባዶ ነው። ብዙ ቀን ሳይቆዩ ይጨምራሉ!',
-                    style: AppTheme.outfit(fontSize: 13, color: Colors.white),
-                  ),
-                  backgroundColor: AppColors.primary,
-                  behavior: SnackBarBehavior.floating,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              );
-            } else {
-              // Navigate to first grade that has this subject
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => GradeDetailScreen(
-                    grade: gradesWithSubject.first.grade,
-                    initialSelectedSubjectId: subject.id,
-                  ),
-                ),
-              );
-            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => SubjectDetailScreen(subject: subject),
+              ),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(14),

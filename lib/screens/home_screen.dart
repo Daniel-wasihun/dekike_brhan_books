@@ -8,15 +8,8 @@ import '../utils/subject_icons.dart';
 import 'grade_detail_screen.dart';
 import '../utils/book_handler.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  bool _isGridView = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +63,25 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            Text(
-                              'ሰንበት ትምህርት ቤት',
-                              style: AppTheme.outfit(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                letterSpacing: 0.5,
+                            Expanded(
+                              child: Text(
+                                'ሰንበት ትምህርት ቤት',
+                                style: AppTheme.outfit(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.5,
+                                ),
                               ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                provider.isDarkMode
+                                    ? Icons.light_mode_rounded
+                                    : Icons.dark_mode_rounded,
+                                color: Colors.white,
+                              ),
+                              onPressed: () => provider.toggleThemeMode(),
                             ),
                           ],
                         ),
@@ -194,14 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Spacer(),
                     IconButton(
                       icon: Icon(
-                        _isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
+                        provider.isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
                         color: AppColors.accent,
                         size: 22,
                       ),
                       onPressed: () {
-                        setState(() {
-                          _isGridView = !_isGridView;
-                        });
+                        provider.setGridView(!provider.isGridView);
                       },
                     ),
                   ],
@@ -210,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             // ─── Grade Cards Grid or List ────────────────────────────
-            if (_isGridView)
+            if (provider.isGridView)
               SliverPadding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
                 sliver: SliverGrid(
@@ -353,7 +355,7 @@ class _GradeCard extends StatelessWidget {
                           child: Text(
                             gradeLevel.label,
                             style: AppTheme.outfit(
-                              color: color,
+                              color: context.isDark ? AppColors.accent : AppColors.primary,
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
                             ),
@@ -466,7 +468,7 @@ class _GradeListCard extends StatelessWidget {
                             child: Text(
                               gradeLevel.label,
                               style: AppTheme.outfit(
-                                color: color,
+                                color: context.isDark ? AppColors.accent : AppColors.primary,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -851,3 +853,5 @@ class _RecentReadingsSection extends StatelessWidget {
     );
   }
 }
+
+

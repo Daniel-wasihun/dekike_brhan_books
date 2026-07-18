@@ -9,12 +9,10 @@ import '../utils/book_handler.dart';
 
 class GradeDetailScreen extends StatefulWidget {
   final int grade;
-  final String? initialSelectedSubjectId;
 
   const GradeDetailScreen({
     super.key,
     required this.grade,
-    this.initialSelectedSubjectId,
   });
 
   @override
@@ -24,12 +22,10 @@ class GradeDetailScreen extends StatefulWidget {
 class _GradeDetailScreenState extends State<GradeDetailScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animCtrl;
-  String? _selectedSubjectId;
 
   @override
   void initState() {
     super.initState();
-    _selectedSubjectId = widget.initialSelectedSubjectId;
     _animCtrl = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -47,22 +43,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
     final gradeLevel =
         LibraryLoader.allGrades.firstWhere((g) => g.grade == widget.grade);
     final color = AppColors.gradeColors[(widget.grade - 1) % 12];
-
-    // Filter textbooks by selected subjectId
-    final textbooks = _selectedSubjectId == null
-        ? gradeLevel.textbooks
-        : gradeLevel.textbooks
-            .where((t) => t.subjectId == _selectedSubjectId)
-            .toList();
-
-    // Unique subjectIds used in this grade
-    final usedSubjectIds =
-        gradeLevel.textbooks.map((t) => t.subjectId).toSet().toList();
-
-    // Map to Subject objects (preserving JSON order)
-    final usedSubjects = LibraryLoader.allSubjects
-        .where((s) => usedSubjectIds.contains(s.id))
-        .toList();
+    final textbooks = gradeLevel.textbooks;
 
     return Scaffold(
       body: CustomScrollView(
@@ -74,7 +55,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
             backgroundColor: AppColors.primaryDark,
             foregroundColor: Colors.white,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18),
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
@@ -150,37 +131,6 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
             ),
           ),
 
-          // ─── Subject Filter Chips ────────────────────────
-          if (usedSubjects.isNotEmpty)
-            SliverToBoxAdapter(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 10),
-                child: Row(
-                  children: [
-                    _SubjectChip(
-                      label: 'ሁሉም ትምህርቶች',
-                      icon: Icons.apps_rounded,
-                      isSelected: _selectedSubjectId == null,
-                      color: color,
-                      onTap: () => setState(() => _selectedSubjectId = null),
-                    ),
-                    const SizedBox(width: 8),
-                    ...usedSubjects.map((subject) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: _SubjectChip(
-                            label: subject.name,
-                            icon: SubjectIcons.iconFor(subject.id),
-                            isSelected: _selectedSubjectId == subject.id,
-                            color: color,
-                            onTap: () =>
-                                setState(() => _selectedSubjectId = subject.id),
-                          ),
-                        )),
-                  ],
-                ),
-              ),
-            ),
 
           // ─── Empty State ─────────────────────────────────
           if (textbooks.isEmpty)
@@ -257,65 +207,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
   }
 }
 
-// ─── Subject Filter Chip ───────────────────────────────────────────────────────
-class _SubjectChip extends StatelessWidget {
-  final String label;
-  final IconData icon;
-  final bool isSelected;
-  final Color color;
-  final VoidCallback onTap;
 
-  const _SubjectChip({
-    required this.label,
-    required this.icon,
-    required this.isSelected,
-    required this.color,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected ? color : Colors.white,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(
-            color: isSelected ? color : AppColors.divider,
-            width: 1.5,
-          ),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: color.withValues(alpha: 0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  )
-                ]
-              : [],
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 15, color: isSelected ? Colors.white : color),
-            const SizedBox(width: 6),
-            Text(
-              label,
-              style: AppTheme.outfit(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: isSelected ? Colors.white : AppColors.textMedium,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
 // ─── Textbook List Item ────────────────────────────────────────────────────────
 class _TextbookListItem extends StatelessWidget {

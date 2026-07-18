@@ -56,16 +56,19 @@ class LibraryLoader {
     return subjectById(subjectId)?.emoji ?? '📖';
   }
 
-  /// Total number of books across all grades.
+  /// Total number of books across all grades and subjects.
   static int get totalBooks {
-    return allGrades.fold(0, (sum, g) => sum + g.textbooks.length);
+    return allBooks.length;
   }
 
-  /// All books across all grades.
+  /// All books across all grades and subjects.
   static List<Textbook> get allBooks {
     final books = <Textbook>[];
     for (final grade in allGrades) {
       books.addAll(grade.textbooks);
+    }
+    for (final subject in allSubjects) {
+      books.addAll(subject.textbooks);
     }
     return books;
   }

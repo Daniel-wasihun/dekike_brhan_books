@@ -35,10 +35,13 @@ class SundaySchoolApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = context.watch<SchoolProvider>();
     return MaterialApp(
       title: 'Sunday School Library',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.theme,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: provider.themeMode,
       home: const SplashScreen(),
     );
   }
@@ -226,9 +229,9 @@ class _MainShellState extends State<MainShell> {
       body: IndexedStack(index: _currentIndex, children: _pages),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: const Border(
-            top: BorderSide(color: AppColors.divider, width: 1),
+          color: context.surfaceColor,
+          border: Border(
+            top: BorderSide(color: context.dividerColor, width: 1),
           ),
           boxShadow: [
             BoxShadow(
@@ -327,7 +330,7 @@ class _NavItem extends StatelessWidget {
               backgroundColor: AppColors.accent,
               child: Icon(
                 isSelected ? activeIcon : icon,
-                color: isSelected ? AppColors.primary : AppColors.textMedium,
+                color: isSelected ? (context.isDark ? AppColors.accent : AppColors.primary) : context.textMediumColor,
                 size: 24,
               ),
             ),
@@ -338,7 +341,7 @@ class _NavItem extends StatelessWidget {
                 style: AppTheme.outfit(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.primary,
+                  color: context.isDark ? AppColors.accent : AppColors.primary,
                 ),
               ),
             ],

@@ -67,8 +67,9 @@ class AppTheme {
     );
   }
 
-  static ThemeData get theme => ThemeData(
+  static ThemeData get lightTheme => ThemeData(
         useMaterial3: true,
+        brightness: Brightness.light,
         colorScheme: const ColorScheme.light(
           primary: AppColors.primary,
           secondary: AppColors.accent,
@@ -76,25 +77,13 @@ class AppTheme {
           error: AppColors.error,
         ),
         scaffoldBackgroundColor: AppColors.background,
+        cardColor: AppColors.cardBg,
+        dividerColor: AppColors.divider,
         textTheme: const TextTheme().copyWith(
-          displayLarge: outfit(
-            color: AppColors.textDark,
-            fontWeight: FontWeight.w700,
-          ),
-          displayMedium: outfit(
-            color: AppColors.textDark,
-            fontWeight: FontWeight.w600,
-          ),
-          titleLarge: outfit(
-            color: AppColors.textDark,
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-          ),
-          titleMedium: outfit(
-            color: AppColors.textDark,
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-          ),
+          displayLarge: outfit(color: AppColors.textDark, fontWeight: FontWeight.w700),
+          displayMedium: outfit(color: AppColors.textDark, fontWeight: FontWeight.w600),
+          titleLarge: outfit(color: AppColors.textDark, fontWeight: FontWeight.w600, fontSize: 20),
+          titleMedium: outfit(color: AppColors.textDark, fontWeight: FontWeight.w500, fontSize: 16),
           bodyLarge: outfit(color: AppColors.textMedium, fontSize: 15),
           bodyMedium: outfit(color: AppColors.textMedium, fontSize: 13),
           bodySmall: outfit(color: AppColors.textLight, fontSize: 12),
@@ -104,12 +93,53 @@ class AppTheme {
           elevation: 0,
           scrolledUnderElevation: 0,
           centerTitle: true,
-          titleTextStyle: outfit(
-            color: AppColors.textDark,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          titleTextStyle: outfit(color: AppColors.textDark, fontSize: 18, fontWeight: FontWeight.w600),
           iconTheme: const IconThemeData(color: AppColors.textDark),
         ),
       );
+
+  static ThemeData get darkTheme => ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: const ColorScheme.dark(
+          primary: AppColors.primaryLight,
+          secondary: AppColors.accent,
+          surface: Color(0xFF1B1C40),
+          error: AppColors.error,
+        ),
+        scaffoldBackgroundColor: const Color(0xFF0F0F26), // Premium spiritual deep indigo
+        cardColor: const Color(0xFF1B1C40),
+        dividerColor: const Color(0xFF2E2F5E),
+        textTheme: const TextTheme().copyWith(
+          displayLarge: outfit(color: Colors.white, fontWeight: FontWeight.w700),
+          displayMedium: outfit(color: Colors.white, fontWeight: FontWeight.w600),
+          titleLarge: outfit(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20),
+          titleMedium: outfit(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 16),
+          bodyLarge: outfit(color: const Color(0xFFE2E2EC), fontSize: 15),
+          bodyMedium: outfit(color: const Color(0xFFE2E2EC), fontSize: 13),
+          bodySmall: outfit(color: const Color(0xFFB0B0C4), fontSize: 12),
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          centerTitle: true,
+          titleTextStyle: outfit(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
+          iconTheme: const IconThemeData(color: Colors.white),
+        ),
+      );
+
+  // Deprecated shim, pointing to lightTheme for backwards compatibility if needed
+  static ThemeData get theme => lightTheme;
+}
+
+extension ThemeHelper on BuildContext {
+  bool get isDark => Theme.of(this).brightness == Brightness.dark;
+  Color get bg => isDark ? const Color(0xFF0F0F26) : AppColors.background;
+  Color get surfaceColor => isDark ? const Color(0xFF1B1C40) : Colors.white;
+  Color get textDarkColor => isDark ? Colors.white : AppColors.textDark;
+  Color get textMediumColor => isDark ? const Color(0xFFE2E2EC) : AppColors.textMedium;
+  Color get textLightColor => isDark ? const Color(0xFFB0B0C4) : AppColors.textLight;
+  Color get textHintColor => isDark ? const Color(0xFF4A4A6A) : AppColors.textHint;
+  Color get dividerColor => isDark ? const Color(0xFF2E2F5E) : AppColors.divider;
 }

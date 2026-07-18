@@ -52,20 +52,28 @@ class Subject {
   final String name;
   final String emoji;
   final String description;
+  final List<Textbook> textbooks;
 
   const Subject({
     required this.id,
     required this.name,
     required this.emoji,
     required this.description,
+    required this.textbooks,
   });
 
   factory Subject.fromJson(Map<String, dynamic> json) {
+    final rawBooks = json['books'] as List<dynamic>? ?? [];
+    final books = rawBooks
+        .map((b) => Textbook.fromJson(b as Map<String, dynamic>, 0))
+        .toList();
+
     return Subject(
       id: json['id'] as String,
       name: json['name'] as String,
       emoji: json['emoji'] as String? ?? '📖',
       description: json['description'] as String? ?? '',
+      textbooks: books,
     );
   }
 }

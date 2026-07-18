@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import '../models/textbook.dart';
 import '../data/textbook_data.dart';
 import '../utils/storage.dart' as storage;
@@ -10,6 +10,8 @@ class SchoolProvider extends ChangeNotifier {
   final Set<int> _favoriteGrades = {};
   final Set<String> _bookmarkedBooks = {}; // Uses assetPath as key
   final List<String> _recentReadings = []; // Uses assetPath
+  bool _isGridView = false; // Default to list view (false)
+  ThemeMode _themeMode = ThemeMode.light;
 
   SchoolProvider() {
     _loadPersistedData();
@@ -34,6 +36,18 @@ class SchoolProvider extends ChangeNotifier {
         final List<dynamic> decoded = jsonDecode(recentsJson);
         _recentReadings.addAll(decoded.cast<String>());
       }
+
+      final layoutPref = storage.getString('layout_preference');
+      if (layoutPref != null) {
+        _isGridView = (layoutPref == 'grid');
+      } else {
+        _isGridView = false; // Default is list
+      }
+
+      final themePref = storage.getString('theme_mode');
+      if (themePref != null) {
+        _themeMode = (themePref == 'dark') ? ThemeMode.dark : ThemeMode.light;
+      }
     } catch (e) {
       debugPrint('Error loading persisted data: $e');
     }
@@ -57,6 +71,21 @@ class SchoolProvider extends ChangeNotifier {
   Set<int> get favoriteGrades => _favoriteGrades;
   Set<String> get bookmarkedBooks => _bookmarkedBooks;
   List<String> get recentReadings => _recentReadings;
+  bool get isGridView => _isGridView;
+  ThemeMode get themeMode => _themeMode;
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
+
+  void toggleThemeMode() {
+    _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+    storage.saveString('theme_mode', _themeMode == ThemeMode.dark ? 'dark' : 'light');
+    notifyListeners();
+  }
+
+  void setGridView(bool value) {
+    _isGridView = value;
+    storage.saveString('layout_preference', value ? 'grid' : 'list');
+    notifyListeners();
+  }
 
   List<GradeLevel> get allGrades => LibraryLoader.allGrades;
   List<Subject> get allSubjects => LibraryLoader.allSubjects;

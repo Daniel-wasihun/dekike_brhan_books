@@ -1,153 +1,124 @@
 {
   "app_name": "ሰንበት ትምህርት ቤት መዝገብ",
   "version": "1.0.0",
-  "description": "የኢትዮጵያ ኦርቶዶክስ ተዋህዶ ሰንበት ትምህርት ቤት የማስተማሪያ መጻህፍት መዝገብ",
   "subjects": [
     {
       "id": "bible_study",
       "name": "የመጽሐፍ ቅዱስ ጥናት",
       "emoji": "✝️",
-      "description": "ቅዱሳት መጻሕፍት፣ የመጽሐፍ ቅዱስ ታሪኮች፣ እና ክርስቲያናዊ ትምህርቶች"
+      "description": "ቅዱሳት መጻሕፍት፣ የመጽሐፍ ቅዱስ ታሪኮች፣ እና ክርስቲያናዊ ትምህርቶች",
+      "books": [
+        {"id": "sub_bible_1", "title": "የብሉይ ኪዳን መግቢያ", "subject_id": "bible_study", "file": "assets/books/mock_bible_1.pdf", "file_type": "pdf", "description": "የብሉይ ኪዳን ቅዱሳት መጻሕፍት መግቢያና ጥናት", "language": "am"},
+        {"id": "sub_bible_2", "title": "የሐዲስ ኪዳን መግቢያ", "subject_id": "bible_study", "file": "assets/books/mock_bible_2.pdf", "file_type": "pdf", "description": "የሐዲስ ኪዳን ወንጌላትና መልእክታት ጥናት", "language": "am"},
+        {"id": "sub_bible_3", "title": "የዳዊት መዝሙር ትርጓሜ", "subject_id": "bible_study", "file": "assets/books/mock_bible_3.pdf", "file_type": "pdf", "description": "የመዝሙረ ዳዊት ምሥጢራዊ ትርጓሜና ጥናት", "language": "am"}
+      ]
     },
     {
       "id": "liturgy_hymns",
       "name": "ሥርዓተ ቤተ ክርስቲያን እና መዝሙር",
       "emoji": "🎶",
-      "description": "መንፈሳዊ መዝሙሮች፣ የዜማ ትምህርቶች እና የቤተ ክርስቲያን ሥርዓት"
+      "description": "መንፈሳዊ መዝሙሮች፣ የዜማ ትምህርቶች እና የቤተ ክርስቲያን ሥርዓት",
+      "books": [
+        {"id": "sub_liturgy_1", "title": "ሥርዓተ ቅዳሴ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_1.pdf", "file_type": "pdf", "description": "የቤተ ክርስቲያን ሥርዓተ ቅዳሴ ትርጓሜ", "language": "am"},
+        {"id": "sub_liturgy_2", "title": "የቅዱስ ያሬድ ዜማዎች", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_2.pdf", "file_type": "pdf", "description": "የቅዱስ ያሬድ ዜማ ሥርዓት እና ዓይነቶች", "language": "am"},
+        {"id": "sub_liturgy_3", "title": "መዝሙረ ዳዊት በዜማ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_3.pdf", "file_type": "pdf", "description": "መዝሙረ ዳዊት የዜማ ትምህርት", "language": "am"}
+      ]
     },
     {
       "id": "christian_ethics",
       "name": "ክርስቲያናዊ ሥነ ምግባር",
       "emoji": "🕊️",
-      "description": "መንፈሳዊ ሕይወት፣ መልካም ሥነ ምግባር እና መንፈሳዊ አገልግሎት"
+      "description": "መንፈሳዊ ሕይወት፣ መልካም ሥነ ምግባር እና መንፈሳዊ አገልግሎት",
+      "books": [
+        {"id": "sub_ethics_1", "title": "ክርስቲያናዊ ሥነ ምግባር መሠረት", "subject_id": "christian_ethics", "file": "assets/books/mock_ethics_1.pdf", "file_type": "pdf", "description": "የክርስቲያን ሕይወት መሠረታዊ ሥነ ምግባር ትምህርት", "language": "am"},
+        {"id": "sub_ethics_2", "title": "የፍቅርና የይቅርታ ትምህርት", "subject_id": "christian_ethics", "file": "assets/books/mock_ethics_2.pdf", "file_type": "pdf", "description": "ስለ ክርስቲያናዊ ፍቅር፣ ይቅርታ እና ትሕትና", "language": "am"}
+      ]
     },
     {
       "id": "church_history",
       "name": "የቤተ ክርስቲያን ታሪክ",
       "emoji": "⛪",
-      "description": "የቤተ ክርስቲያን ታሪክ፣ የቅዱሳን ታሪክ እና ጉልህ ኩነቶች"
+      "description": "የቤተ ክርስቲያን ታሪክ፣ የቅዱሳን ታሪክ እና ጉልህ ኩነቶች",
+      "books": [
+        {"id": "sub_history_1", "title": "የኢትዮጵያ ቤተ ክርስቲያን ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_1.pdf", "file_type": "pdf", "description": "ከጥንት እስከ ዘመናዊ ዘመን ያለው የቤተ ክርስቲያን ታሪክ", "language": "am"},
+        {"id": "sub_history_2", "title": "የሐዋርያት ሥራ ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_2.pdf", "file_type": "pdf", "description": "የቅዱሳን ሐዋርያት ሥራና ስብከት ታሪክ", "language": "am"},
+        {"id": "sub_history_3", "title": "የኢትዮጵያ ጻድቃን ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_3.pdf", "file_type": "pdf", "description": "በኢትዮጵያ ቤተ ክርስቲያን የታወቁ ጻድቃንና ሰማዕታት", "language": "am"}
+      ]
     },
     {
       "id": "prayers_devotionals",
       "name": "ጸሎት እና አምልኮ",
       "emoji": "🙏",
-      "description": "የዘወትር ጸሎቶች፣ መንፈሳዊ ትምህርቶች እና አምልኮ"
+      "description": "የዘወትር ጸሎቶች፣ መንፈሳዊ ትምህርቶች እና አምልኮ",
+      "books": [
+        {"id": "sub_prayer_1", "title": "የዘወትር ጸሎት መጽሐፍ", "subject_id": "prayers_devotionals", "file": "assets/books/mock_prayer_1.pdf", "file_type": "pdf", "description": "የዘወትር ጸሎታት ስብስብና ትርጓሜ", "language": "am"},
+        {"id": "sub_prayer_2", "title": "ውዳሴ ማርያም ትርጓሜ", "subject_id": "prayers_devotionals", "file": "assets/books/mock_prayer_2.pdf", "file_type": "pdf", "description": "የውዳሴ ማርያም ትርጓሜና ምሥጢር", "language": "am"}
+      ]
     },
     {
       "id": "inspirational",
       "name": "መንፈሳዊ ምክሮች",
       "emoji": "💡",
-      "description": "መንፈሳዊ እድገት እና አነቃቂ መጻሕፍት"
+      "description": "መንፈሳዊ እድገት እና አነቃቂ መጻሕፍት",
+      "books": [
+        {"id": "sub_inspire_1", "title": "መንፈሳዊ እድገት", "subject_id": "inspirational", "file": "assets/books/mock_inspire_1.pdf", "file_type": "pdf", "description": "ለመንፈሳዊ ሕይወት ዕድገት የሚረዱ ትምህርቶች", "language": "am"},
+        {"id": "sub_inspire_2", "title": "የአገልግሎት ጥሪ", "subject_id": "inspirational", "file": "assets/books/mock_inspire_2.pdf", "file_type": "pdf", "description": "ወጣቶችን ለመንፈሳዊ አገልግሎት ማዘጋጃ", "language": "am"}
+      ]
     }
   ],
   "grades": [
     {
-      "grade": 1,
-      "label": "፩ኛ ክፍል",
-      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 2,
-      "label": "፪ኛ ክፍል",
-      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 3,
-      "label": "፫ኛ ክፍል",
-      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 4,
-      "label": "፬ኛ ክፍል",
-      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 5,
-      "label": "፭ኛ ክፍል",
-      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 6,
-      "label": "፮ኛ ክፍል",
-      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 7,
-      "label": "፯ኛ ክፍል",
-      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 8,
-      "label": "፰ኛ ክፍል",
-      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
-      "books": []
-    },
-    {
-      "grade": 9,
-      "label": "፱ኛ ክፍል",
-      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 1, "label": "፩ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {
-          "id": "habib_giyorgis_9",
-          "title": "ቅዱስ ሐቢብ ጊዮርጊስ — ሕይወቱና ትምህርቱ",
-          "subject_id": "church_history",
-          "file": "assets/books/habib_giyorgis.pdf",
-          "file_type": "pdf",
-          "description": "የዘመናዊ የኢትዮጵያ ኦርቶዶክስ ሰንበት ትምህርት ቤት መስራች የሆኑት የቅዱስ ሐቢብ ጊዮርጊስ ሚካኤል መንፈሳዊ ሕይወት እና ትምህርታዊ ውርስ።",
-          "language": "am",
-          "pages": null,
-          "year": null
-        }
+        {"id": "g1_book1", "title": "የኦርቶዶክስ ተዋሕዶ እምነትና ሥርዓት", "subject_id": "bible_study", "file": "assets/books/mock_g1_1.pdf", "file_type": "pdf", "description": "የ፩ኛ ክፍል መሠረታዊ ትምህርት", "language": "am"},
+        {"id": "g1_book2", "title": "የሕፃናት መጽሐፍ ቅዱስ ታሪኮች", "subject_id": "bible_study", "file": "assets/books/mock_g1_2.pdf", "file_type": "pdf", "description": "ለጀማሪዎች የተዘጋጁ ታሪኮች", "language": "am"},
+        {"id": "g1_book3", "title": "የመጀመሪያ ጸሎት ትምህርት", "subject_id": "prayers_devotionals", "file": "assets/books/mock_g1_3.pdf", "file_type": "pdf", "description": "ለ፩ኛ ክፍል የጸሎት ሥልጠና", "language": "am"}
       ]
     },
     {
-      "grade": 10,
-      "label": "፲ኛ ክፍል",
-      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 2, "label": "፪ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {
-          "id": "modern_orthodox_thinkers_10",
-          "title": "ዘመናዊ የኦርቶዶክስ አስተማሪዎች",
-          "subject_id": "church_history",
-          "file": "assets/books/modern_orthodox_thinkers.pdf",
-          "file_type": "pdf",
-          "description": "የዘመናዊ ምሥራቃዊ ኦርቶዶክስ የነገረ መለኮት አሳቢያን እና ለክርስቲያናዊ አስተሳሰብ ያበረከቱት አስተዋጽኦ።",
-          "language": "am",
-          "pages": null,
-          "year": null
-        }
+        {"id": "g2_book1", "title": "ክርስቲያናዊ ሕይወትና ሥነ ምግባር", "subject_id": "christian_ethics", "file": "assets/books/mock_g2_1.pdf", "file_type": "pdf", "description": "የ፪ኛ ክፍል ሥነ ምግባር", "language": "am"},
+        {"id": "g2_book2", "title": "አሥሩ ትእዛዛት ለሕፃናት", "subject_id": "bible_study", "file": "assets/books/mock_g2_2.pdf", "file_type": "pdf", "description": "አሥርቱ ሕግጋት ማብራሪያ", "language": "am"},
+        {"id": "g2_book3", "title": "የታማኝነት ታሪኮች", "subject_id": "christian_ethics", "file": "assets/books/mock_g2_3.pdf", "file_type": "pdf", "description": "መንፈሳዊ ምሳሌዎችና ታሪኮች", "language": "am"}
       ]
     },
     {
-      "grade": 11,
-      "label": "፲፩ኛ ክፍል",
-      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 3, "label": "፫ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {
-          "id": "eat_that_frog_11",
-          "title": "Eat That Frog — የአማርኛ ትርጉም",
-          "subject_id": "inspirational",
-          "file": "assets/books/eat_that_frog_amharic.pdf",
-          "file_type": "pdf",
-          "description": "በጊዜ አጠቃቀም፣ ቅድሚያ በሚሰጣቸው ጉዳዮች እና እግዚአብሔር የሰጠንን ዓላማ ማሳካት ላይ ያተኮረ መጽሐፍ።",
-          "language": "am",
-          "pages": null,
-          "year": null
-        }
+        {"id": "g3_book1", "title": "ታሪከ ነገሥት ወሊቃውንት", "subject_id": "church_history", "file": "assets/books/mock_g3_1.pdf", "file_type": "pdf", "description": "ሊቃውንትና ታሪክ መማሪያ", "language": "am"},
+        {"id": "g3_book2", "title": "የቅዱስ ያሬድ ዜማ መሠረቶች", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g3_2.pdf", "file_type": "pdf", "description": "የዜማ ሥርዓቶች መግቢያ", "language": "am"}
       ]
     },
     {
-      "grade": 12,
-      "label": "፲፪ኛ ክፍል",
-      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
-      "books": []
-    }
+      "grade": 4, "label": "፬ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
+      "books": [
+        {"id": "g4_book1", "title": "ሥርዓተ ማኅሌት ወቅዳሴ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g4_1.pdf", "file_type": "pdf", "description": "ሥርዓተ ዜማና ቅዳሴ", "language": "am"},
+        {"id": "g4_book2", "title": "የቅዳሴ ጸሎት ትርጓሙ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g4_2.pdf", "file_type": "pdf", "description": "ቅዳሴና ትንተና", "language": "am"}
+      ]
+    },
+    {"grade": 5, "label": "፭ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
+    {"grade": 6, "label": "፮ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
+    {"grade": 7, "label": "፯ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
+    {"grade": 8, "label": "፰ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
+    {
+      "grade": 9, "label": "፱ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {"id": "habib_giyorgis_9", "title": "ቅዱስ ሐቢብ ጊዮርጊስ — ሕይወቱና ትምህርቱ", "subject_id": "church_history", "file": "assets/books/habib_giyorgis.pdf", "file_type": "pdf", "description": "የሰንበት ት/ቤት መስራች ታሪክ", "language": "am"}
+      ]
+    },
+    {
+      "grade": 10, "label": "፲ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {"id": "modern_orthodox_10", "title": "ዘመናዊ የኦርቶዶክስ አስተማሪዎች", "subject_id": "church_history", "file": "assets/books/modern_orthodox_thinkers.pdf", "file_type": "pdf", "description": "ዘመናዊ ኦርቶዶክስ አሳቢያን", "language": "am"}
+      ]
+    },
+    {
+      "grade": 11, "label": "፲፩ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {"id": "eat_that_frog_11", "title": "Eat That Frog — የአማርኛ ትርጉም", "subject_id": "inspirational", "file": "assets/books/eat_that_frog_amharic.pdf", "file_type": "pdf", "description": "ጊዜ አጠቃቀምና ዓላማ ማሳካት", "language": "am"}
+      ]
+    },
+    {"grade": 12, "label": "፲፪ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት", "books": []}
   ]
 }
