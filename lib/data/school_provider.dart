@@ -12,6 +12,7 @@ class SchoolProvider extends ChangeNotifier {
   final List<String> _recentReadings = []; // Uses assetPath
   bool _isGridView = false; // Default to list view (false)
   ThemeMode _themeMode = ThemeMode.light;
+  int _unreadBookmarksCount = 0;
 
   SchoolProvider() {
     _loadPersistedData();
@@ -48,6 +49,11 @@ class SchoolProvider extends ChangeNotifier {
       if (themePref != null) {
         _themeMode = (themePref == 'dark') ? ThemeMode.dark : ThemeMode.light;
       }
+
+      final unreadCountStr = storage.getString('unread_bookmarks_count');
+      if (unreadCountStr != null) {
+        _unreadBookmarksCount = int.tryParse(unreadCountStr) ?? 0;
+      }
     } catch (e) {
       debugPrint('Error loading persisted data: $e');
     }
@@ -74,6 +80,15 @@ class SchoolProvider extends ChangeNotifier {
   bool get isGridView => _isGridView;
   ThemeMode get themeMode => _themeMode;
   bool get isDarkMode => _themeMode == ThemeMode.dark;
+  int get unreadBookmarksCount => _unreadBookmarksCount;
+
+  void clearUnreadBookmarksCount() {
+    if (_unreadBookmarksCount > 0) {
+      _unreadBookmarksCount = 0;
+      storage.saveString('unread_bookmarks_count', '0');
+      notifyListeners();
+    }
+  }
 
   void toggleThemeMode() {
     _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
@@ -115,6 +130,8 @@ class SchoolProvider extends ChangeNotifier {
       _bookmarkedBooks.remove(assetPath);
     } else {
       _bookmarkedBooks.add(assetPath);
+      _unreadBookmarksCount++;
+      storage.saveString('unread_bookmarks_count', _unreadBookmarksCount.toString());
     }
     _saveBookmarks();
     notifyListeners();

@@ -259,9 +259,12 @@ class _MainShellState extends State<MainShell> {
                   activeIcon: Icons.bookmark_rounded,
                   label: 'የተቀመጡ',
                   isSelected: _currentIndex == 1,
-                  onTap: () => setState(() => _currentIndex = 1),
+                  onTap: () {
+                    context.read<SchoolProvider>().clearUnreadBookmarksCount();
+                    setState(() => _currentIndex = 1);
+                  },
                   badgeCount:
-                      context.watch<SchoolProvider>().bookmarkedBooks.length,
+                      context.watch<SchoolProvider>().unreadBookmarksCount,
                 ),
                 _NavItem(
                   icon: Icons.library_books_outlined,

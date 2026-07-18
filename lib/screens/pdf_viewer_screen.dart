@@ -24,6 +24,10 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.primaryDark,
         foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded, size: 24, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(

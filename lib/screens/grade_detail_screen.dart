@@ -55,7 +55,7 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
             backgroundColor: AppColors.primaryDark,
             foregroundColor: Colors.white,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 18, color: Colors.white),
+              icon: const Icon(Icons.arrow_back_rounded, size: 24, color: Colors.white),
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
