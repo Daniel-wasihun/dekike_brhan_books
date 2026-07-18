@@ -5,7 +5,7 @@ import '../data/school_provider.dart';
 import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
-import 'grade_detail_screen.dart';
+import '../utils/book_handler.dart';
 
 class BookmarksScreen extends StatelessWidget {
   const BookmarksScreen({super.key});
@@ -131,17 +131,7 @@ class BookmarksScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(16),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(16),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => GradeDetailScreen(
-                                      grade: book.grade,
-                                      initialSelectedSubjectId: book.subjectId,
-                                    ),
-                                  ),
-                                );
-                              },
+                              onTap: () => openTextbook(context, book, gradeColor: color),
                               child: Padding(
                                 padding: const EdgeInsets.all(16),
                                 child: Row(

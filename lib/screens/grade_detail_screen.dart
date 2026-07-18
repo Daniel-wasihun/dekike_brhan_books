@@ -4,9 +4,8 @@ import '../theme/app_theme.dart';
 import '../data/school_provider.dart';
 import '../data/textbook_data.dart';
 import '../models/textbook.dart';
-import '../utils/file_opener.dart';
 import '../utils/subject_icons.dart';
-import 'pdf_viewer_screen.dart';
+import '../utils/book_handler.dart';
 
 class GradeDetailScreen extends StatefulWidget {
   final int grade;
@@ -174,29 +173,36 @@ class _GradeDetailScreenState extends State<GradeDetailScreen>
             SliverFillRemaining(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(32),
+                  padding: const EdgeInsets.all(40),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.menu_book_outlined,
-                          color: color.withValues(alpha: 0.4), size: 56),
-                      const SizedBox(height: 16),
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: color.withValues(alpha: 0.08),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(Icons.hourglass_empty_rounded,
+                            color: color, size: 48),
+                      ),
+                      const SizedBox(height: 20),
                       Text(
-                        'ምንም ትምህርት አልተጨመረም',
+                        'ፋይል አልተገኘም',
                         style: AppTheme.outfit(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                           color: AppColors.textDark,
                         ),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 10),
                       Text(
-                        'የፒዲኤፍ ወይም ዶክመንት ፋይሎትን ወደ assets/books/ ይጨምሩ\nከዚያም assets/library.json ን ያዘምኑ',
+                        'ይቅርታ! ለዚህ ክፍል ምንም ፋይል አልተጨመረም።\nቅርቡ ሳይሸሽ ማከል ይጀምራሉ!',
                         textAlign: TextAlign.center,
                         style: AppTheme.outfit(
-                          fontSize: 13,
+                          fontSize: 14,
                           color: AppColors.textLight,
-                          height: 1.4,
+                          height: 1.5,
                         ),
                       ),
                     ],
@@ -327,7 +333,7 @@ class _TextbookListItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
-          onTap: () => _showTextbookDetail(context, textbook, gradeColor),
+          onTap: () => openTextbook(context, textbook, gradeColor: gradeColor),
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -409,276 +415,4 @@ class _TextbookListItem extends StatelessWidget {
     );
   }
 
-  void _showTextbookDetail(
-      BuildContext context, Textbook textbook, Color color) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => _TextbookDetailSheet(textbook: textbook, color: color),
-    );
-  }
-}
-
-// ─── Textbook Detail Bottom Sheet ──────────────────────────────────────────────
-class _TextbookDetailSheet extends StatefulWidget {
-  final Textbook textbook;
-  final Color color;
-
-  const _TextbookDetailSheet({
-    required this.textbook,
-    required this.color,
-  });
-
-  @override
-  State<_TextbookDetailSheet> createState() => _TextbookDetailSheetState();
-}
-
-class _TextbookDetailSheetState extends State<_TextbookDetailSheet> {
-  bool _isOpening = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final subject = LibraryLoader.subjectById(widget.textbook.subjectId);
-    final subjectIcon = SubjectIcons.iconFor(widget.textbook.subjectId);
-    final subjectColor =
-        SubjectIcons.colorFor(widget.textbook.subjectId, widget.color);
-
-    return Container(
-      padding: const EdgeInsets.only(bottom: 24),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Handle bar
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 12),
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.divider,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title row with icon
-                Row(
-                  children: [
-                    Container(
-                      width: 56,
-                      height: 56,
-                      decoration: BoxDecoration(
-                        color: subjectColor.withValues(alpha: 0.1),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(subjectIcon, color: subjectColor, size: 28),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.textbook.title,
-                            style: AppTheme.outfit(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textDark,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'ክፍል ${widget.textbook.grade} • ${subject?.name ?? widget.textbook.subjectId}',
-                            style: AppTheme.outfit(
-                              fontSize: 13,
-                              color: AppColors.textMedium,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-
-                // Description
-                if (widget.textbook.description.isNotEmpty) ...[
-                  Text(
-                    'ስለዚህ ትምህርት',
-                    style: AppTheme.outfit(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textDark,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    widget.textbook.description,
-                    style: AppTheme.outfit(
-                      fontSize: 13,
-                      color: AppColors.textMedium,
-                      height: 1.4,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-
-                // File details
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.divider),
-                  ),
-                  child: Column(
-                    children: [
-                      _DetailRow(
-                        Icons.insert_drive_file_rounded,
-                        'ፋይል',
-                        widget.textbook.file.split('/').last,
-                      ),
-                      _DetailRow(
-                        Icons.label_rounded,
-                        'አይነት',
-                        widget.textbook.fileType.toUpperCase(),
-                      ),
-                      _DetailRow(
-                        Icons.language_rounded,
-                        'ቋንቋ',
-                        widget.textbook.language == 'am'
-                            ? 'አማርኛ'
-                            : 'እንግሊዘኛ',
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-
-                // Open button — actually opens the PDF
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    onPressed: _isOpening
-                        ? null
-                        : () async {
-                            setState(() => _isOpening = true);
-                            try {
-                              context.read<SchoolProvider>().addRecentReading(widget.textbook.file);
-                              if (widget.textbook.fileType.toLowerCase() ==
-                                  'pdf') {
-                                if (context.mounted) {
-                                  Navigator.pop(context); // Close bottom sheet
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (_) => PdfViewerScreen(
-                                        textbook: widget.textbook,
-                                        themeColor: subjectColor,
-                                      ),
-                                    ),
-                                  );
-                                }
-                              } else {
-                                await openAssetFile(widget.textbook.file);
-                              }
-                            } catch (e) {
-                              if (context.mounted) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'ፋይሉን መክፈት አልተቻለም፡ ${widget.textbook.file.split('/').last}',
-                                      style: AppTheme.outfit(fontSize: 13),
-                                    ),
-                                    backgroundColor: AppColors.error,
-                                    behavior: SnackBarBehavior.floating,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                  ),
-                                );
-                              }
-                            } finally {
-                              if (mounted) setState(() => _isOpening = false);
-                            }
-                          },
-                    icon: _isOpening
-                        ? const SizedBox(
-                            width: 18,
-                            height: 18,
-                            child: CircularProgressIndicator(
-                                strokeWidth: 2, color: Colors.white),
-                          )
-                        : const Icon(Icons.open_in_new_rounded),
-                    label: Text(_isOpening ? 'በመክፈት ላይ...' : 'ፒዲኤፍ ክፈት'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: subjectColor,
-                      foregroundColor: Colors.white,
-                      disabledBackgroundColor:
-                          subjectColor.withValues(alpha: 0.6),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 4),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DetailRow extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
-
-  const _DetailRow(this.icon, this.label, this.value);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Row(
-        children: [
-          Icon(icon, size: 14, color: AppColors.textLight),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: AppTheme.outfit(
-              fontSize: 12,
-              color: AppColors.textLight,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Spacer(),
-          Flexible(
-            child: Text(
-              value,
-              style: AppTheme.outfit(
-                fontSize: 12,
-                color: AppColors.textDark,
-                fontWeight: FontWeight.w600,
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

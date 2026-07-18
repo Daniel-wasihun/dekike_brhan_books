@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../data/textbook_data.dart';
+import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
+import 'grade_detail_screen.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -13,12 +15,15 @@ class AboutScreen extends StatelessWidget {
     final totalBooks = LibraryLoader.totalBooks;
 
     return Scaffold(
+      backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
+          // ─── App Bar ─────────────────────────────────────────
           SliverAppBar(
-            expandedHeight: 140,
+            expandedHeight: 130,
             pinned: true,
             backgroundColor: AppColors.background,
+            elevation: 0,
             flexibleSpace: FlexibleSpaceBar(
               background: SafeArea(
                 child: Padding(
@@ -34,8 +39,9 @@ class AboutScreen extends StatelessWidget {
                           color: AppColors.textDark,
                         ),
                       ),
+                      const SizedBox(height: 4),
                       Text(
-                        'የሰንበት ትምህርት ቤት መጻሕፍት መዝገብ',
+                        'የሰንበት ትምህርት ቤት የመጻሕፍት ዝርዝር',
                         style: AppTheme.outfit(
                           fontSize: 14,
                           color: AppColors.textMedium,
@@ -47,279 +53,176 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  // Mission card
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF1E1F4B), Color(0xFF2A2B5F)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.12),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(Icons.church_rounded,
-                              color: AppColors.accent, size: 36),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          'የሰንበት ትምህርት ቤት መዝገብ',
-                          style: AppTheme.outfit(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          'ለኢትዮጵያ ኦርቶዶክስ ተዋህዶ ወጣቶች ቅዱሳት መጻሕፍትን፣ ሥርዓተ ቤተ ክርስቲያንን፣ የቤተ ክርስቲያን ታሪክን እና መንፈሳዊ ሥነ ምግባርን ለማስተማር የተዘጋጀ።',
-                          textAlign: TextAlign.center,
-                          style: AppTheme.outfit(
-                            color: Colors.white70,
-                            fontSize: 13,
-                            height: 1.4,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 24),
 
-                  // Stats
-                  const _SectionHeader('የትምህርት አጠቃላይ እይታ'),
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _StatCard(
-                          '${grades.length}',
-                          'የክፍል ደረጃዎች',
-                          Icons.layers_rounded,
-                          AppColors.primary,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _StatCard(
-                          '$totalBooks',
-                          'አጠቃላይ ትምህርቶች',
-                          Icons.menu_book_rounded,
-                          AppColors.accent,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: _StatCard(
-                          '${subjects.length}',
-                          'የትምህርት አይነቶች',
-                          Icons.category_rounded,
-                          AppColors.gradeColors[3],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 100),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
 
-                  // Subjects list from JSON
-                  const _SectionHeader('የትምህርት አይነቶች'),
-                  const SizedBox(height: 12),
-                  ...subjects.map((subject) => Container(
-                        margin: const EdgeInsets.only(bottom: 8),
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                          border:
-                              Border.all(color: AppColors.divider, width: 1.5),
-                        ),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: SubjectIcons.colorFor(
-                                        subject.id, AppColors.primary)
-                                    .withValues(alpha: 0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                SubjectIcons.iconFor(subject.id),
-                                color: SubjectIcons.colorFor(
-                                    subject.id, AppColors.primary),
-                                size: 24,
-                              ),
-                            ),
-                            const SizedBox(width: 14),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    subject.name,
-                                    style: AppTheme.outfit(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.textDark,
-                                    ),
-                                  ),
-                                  Text(
-                                    subject.description,
-                                    style: AppTheme.outfit(
-                                      fontSize: 11,
-                                      color: AppColors.textLight,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
-                  const SizedBox(height: 24),
+                // ─── Stats Row ──────────────────────────────────
+                Row(
+                  children: [
+                    _StatCard('${grades.length}', 'የክፍል ደረጃዎች', Icons.layers_rounded, AppColors.primary),
+                    const SizedBox(width: 10),
+                    _StatCard('$totalBooks', 'አጠቃላይ መጻሕፍት', Icons.menu_book_rounded, AppColors.accent),
+                    const SizedBox(width: 10),
+                    _StatCard('${subjects.length}', 'የትምህርት አይነቶች', Icons.category_rounded, AppColors.gradeColors[3]),
+                  ],
+                ),
+                const SizedBox(height: 28),
 
-                  // Grade breakdown from JSON
-                  const _SectionHeader('የክፍል ደረጃ ዝርዝር'),
-                  const SizedBox(height: 12),
-                  ...grades.map((grade) {
-                    final color = AppColors.gradeColors[(grade.grade - 1) % 12];
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16),
-                        border:
-                            Border.all(color: AppColors.divider, width: 1.5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: color.withValues(alpha: 0.1),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  '${grade.grade}',
-                                  style: AppTheme.outfit(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    color: color,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    grade.label,
-                                    style: AppTheme.outfit(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppColors.textDark,
-                                    ),
-                                  ),
-                                  Text(
-                                    grade.category,
-                                    style: AppTheme.outfit(
-                                      fontSize: 11,
-                                      color: AppColors.textLight,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: grade.textbooks.isEmpty
-                                    ? AppColors.divider
-                                    : color.withValues(alpha: 0.1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                grade.textbooks.isEmpty
-                                    ? 'ባዶ'
-                                    : '${grade.textbooks.length} ትምህርቶች',
-                                style: AppTheme.outfit(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: grade.textbooks.isEmpty
-                                      ? AppColors.textHint
-                                      : color,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                // ─── Subjects ────────────────────────────────────
+                _SectionHeader(title: 'የትምህርት አይነቶች', icon: Icons.category_rounded),
+                const SizedBox(height: 12),
+                if (subjects.isEmpty)
+                  _EmptyState(message: 'ምንም የትምህርት አይነት አልተጨመረም።')
+                else
+                  ...subjects.map((subject) {
+                    final color = SubjectIcons.colorFor(subject.id, AppColors.primary);
+                    final booksInSubject = LibraryLoader.allGrades
+                        .expand((g) => g.textbooks)
+                        .where((b) => b.subjectId == subject.id)
+                        .length;
+                    return _ClickableSubjectCard(
+                      subject: subject,
+                      color: color,
+                      bookCount: booksInSubject,
                     );
                   }),
+                const SizedBox(height: 28),
 
-                  const SizedBox(height: 24),
-
-                  // How to add books tip
-                  Container(
-                    padding: const EdgeInsets.all(16),
+                // ─── Grade Breakdown ──────────────────────────────
+                _SectionHeader(title: 'የክፍል ደረጃ ዝርዝር', icon: Icons.layers_rounded),
+                const SizedBox(height: 12),
+                ...grades.map((grade) {
+                  final color = AppColors.gradeColors[(grade.grade - 1) % 12];
+                  final isEmpty = grade.textbooks.isEmpty;
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: 8),
                     decoration: BoxDecoration(
-                      color: AppColors.accent.withValues(alpha: 0.06),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                          color: AppColors.accent.withValues(alpha: 0.2), width: 1),
+                      border: Border.all(color: AppColors.divider, width: 1.5),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Icon(Icons.tips_and_updates_rounded,
-                                color: AppColors.accent, size: 18),
-                            const SizedBox(width: 8),
-                            Text(
-                              'መጻሕፍትን እንዴት መጨመር ይቻላል',
-                              style: AppTheme.outfit(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                                color: AppColors.textDark,
-                              ),
-                            ),
-                          ],
+                    child: Material(
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.circular(16),
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(16),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => GradeDetailScreen(grade: grade.grade),
+                          ),
                         ),
-                        const SizedBox(height: 10),
-                        const _TipStep(
-                            '1', 'የፒዲኤፍ ወይም ዶክመንት ፋይሎትን ወደ\nassets/books/ ይቅዱ'),
-                        const _TipStep('2', 'assets/library.json ፋይልን ይክፈቱ'),
-                        const _TipStep('3',
-                            'በትክክለኛው የክፍል ደረጃ "books" ውስጥ ዝርዝሩን ይጨምሩ'),
-                        const _TipStep('4', 'መተግበሪያውን እንደገና ያስጀምሩ'),
-                      ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  color: color.withValues(alpha: 0.12),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${grade.grade}',
+                                    style: AppTheme.outfit(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: color,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 14),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      grade.label,
+                                      style: AppTheme.outfit(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.textDark,
+                                      ),
+                                    ),
+                                    Text(
+                                      grade.category,
+                                      style: AppTheme.outfit(
+                                        fontSize: 11,
+                                        color: AppColors.textLight,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: isEmpty ? AppColors.divider : color.withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Text(
+                                  isEmpty ? 'ባዶ' : '${grade.textbooks.length} መጻሕፍት',
+                                  style: AppTheme.outfit(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: isEmpty ? AppColors.textHint : color,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Icon(Icons.chevron_right_rounded,
+                                  color: color.withValues(alpha: 0.5), size: 18),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                  );
+                }),
+                const SizedBox(height: 24),
 
-                  const SizedBox(height: 100),
-                ],
-              ),
+                // ─── How to add books tip ─────────────────────────
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: AppColors.accent.withValues(alpha: 0.06),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                        color: AppColors.accent.withValues(alpha: 0.25), width: 1),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.tips_and_updates_rounded,
+                              color: AppColors.accent, size: 18),
+                          const SizedBox(width: 8),
+                          Text(
+                            'መጻሕፍትን እንዴት ማከል ይቻላል',
+                            style: AppTheme.outfit(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textDark,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      const _TipStep('1', 'ፒዲኤፍ ፋይሉን ወደ assets/books/ ይቅዱ'),
+                      const _TipStep('2', 'assets/library.json ፋይልን ይክፈቱ'),
+                      const _TipStep('3', 'ተገቢውን የክፍል ደረጃ "books" ዝርዝር ውስጥ ያክሉ'),
+                      const _TipStep('4', 'መተግበሪያውን እንደገና ያስጀምሩ'),
+                    ],
+                  ),
+                ),
+              ]),
             ),
           ),
         ],
@@ -328,6 +231,207 @@ class AboutScreen extends StatelessWidget {
   }
 }
 
+// ─── Clickable Subject Card ──────────────────────────────────────────────────
+class _ClickableSubjectCard extends StatelessWidget {
+  final Subject subject;
+  final Color color;
+  final int bookCount;
+
+  const _ClickableSubjectCard({
+    required this.subject,
+    required this.color,
+    required this.bookCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.divider, width: 1.5),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(14),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(14),
+          onTap: () {
+            // Filter grades that have books in this subject
+            final gradesWithSubject = LibraryLoader.allGrades
+                .where((g) => g.textbooks.any((b) => b.subjectId == subject.id))
+                .toList();
+
+            if (gradesWithSubject.isEmpty) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    'ይህ ትምህርት አሁን ባዶ ነው። ብዙ ቀን ሳይቆዩ ይጨምራሉ!',
+                    style: AppTheme.outfit(fontSize: 13, color: Colors.white),
+                  ),
+                  backgroundColor: AppColors.primary,
+                  behavior: SnackBarBehavior.floating,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              );
+            } else {
+              // Navigate to first grade that has this subject
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => GradeDetailScreen(
+                    grade: gradesWithSubject.first.grade,
+                    initialSelectedSubjectId: subject.id,
+                  ),
+                ),
+              );
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(14),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(SubjectIcons.iconFor(subject.id), color: color, size: 22),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        subject.name,
+                        style: AppTheme.outfit(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textDark,
+                        ),
+                      ),
+                      Text(
+                        bookCount == 0 ? 'ምንም ፋይል የለም' : '$bookCount መጻሕፍት',
+                        style: AppTheme.outfit(
+                          fontSize: 11,
+                          color: bookCount == 0 ? AppColors.textHint : AppColors.textLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right_rounded,
+                    color: color.withValues(alpha: 0.5), size: 18),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Section Header ─────────────────────────────────────────────────────────
+class _SectionHeader extends StatelessWidget {
+  final String title;
+  final IconData icon;
+  const _SectionHeader({required this.title, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(icon, color: AppColors.primary, size: 18),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: AppTheme.outfit(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: AppColors.textDark,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// ─── Stat Card ───────────────────────────────────────────────────────────────
+class _StatCard extends StatelessWidget {
+  final String value;
+  final String label;
+  final IconData icon;
+  final Color color;
+
+  const _StatCard(this.value, this.label, this.icon, this.color);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.divider, width: 1.5),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(7),
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: color, size: 16),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              value,
+              style: AppTheme.outfit(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: AppColors.textDark,
+              ),
+            ),
+            Text(
+              label,
+              style: AppTheme.outfit(fontSize: 10, color: AppColors.textLight),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Empty State ─────────────────────────────────────────────────────────────
+class _EmptyState extends StatelessWidget {
+  final String message;
+  const _EmptyState({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: Center(
+        child: Text(
+          message,
+          style: AppTheme.outfit(fontSize: 13, color: AppColors.textLight),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Tip Step ────────────────────────────────────────────────────────────────
 class _TipStep extends StatelessWidget {
   final String step;
   final String text;
@@ -352,87 +456,14 @@ class _TipStep extends StatelessWidget {
               child: Text(
                 step,
                 style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700),
+                    color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
               ),
             ),
           ),
           Expanded(
             child: Text(
               text,
-              style: AppTheme.outfit(
-                  fontSize: 13, color: AppColors.textMedium, height: 1.4),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  const _SectionHeader(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: AppTheme.outfit(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: AppColors.textDark,
-        ),
-      ),
-    );
-  }
-}
-
-class _StatCard extends StatelessWidget {
-  final String value;
-  final String label;
-  final IconData icon;
-  final Color color;
-
-  const _StatCard(this.value, this.label, this.icon, this.color);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.divider, width: 1.5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(7),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.08),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(icon, color: color, size: 16),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            value,
-            style: AppTheme.outfit(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: AppColors.textDark,
-            ),
-          ),
-          Text(
-            label,
-            style: AppTheme.outfit(
-              fontSize: 11,
-              color: AppColors.textLight,
+              style: AppTheme.outfit(fontSize: 13, color: AppColors.textMedium, height: 1.4),
             ),
           ),
         ],

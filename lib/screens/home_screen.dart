@@ -6,9 +6,17 @@ import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
 import 'grade_detail_screen.dart';
+import '../utils/book_handler.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _isGridView = true;
 
   @override
   Widget build(BuildContext context) {
@@ -184,32 +192,59 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    const Icon(Icons.church_rounded,
-                        color: AppColors.accent, size: 18),
+                    IconButton(
+                      icon: Icon(
+                        _isGridView ? Icons.view_list_rounded : Icons.grid_view_rounded,
+                        color: AppColors.accent,
+                        size: 22,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isGridView = !_isGridView;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
             ),
 
-            // ─── Grade Cards Grid ────────────────────────────
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final gradeLevel = LibraryLoader.allGrades[index];
-                    return _GradeCard(gradeLevel: gradeLevel);
-                  },
-                  childCount: LibraryLoader.allGrades.length,
+            // ─── Grade Cards Grid or List ────────────────────────────
+            if (_isGridView)
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+                sliver: SliverGrid(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final gradeLevel = LibraryLoader.allGrades[index];
+                      return _GradeCard(gradeLevel: gradeLevel);
+                    },
+                    childCount: LibraryLoader.allGrades.length,
+                  ),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 0.95,
+                  ),
                 ),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.95,
+              )
+            else
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 100),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final gradeLevel = LibraryLoader.allGrades[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: _GradeListCard(gradeLevel: gradeLevel),
+                      );
+                    },
+                    childCount: LibraryLoader.allGrades.length,
+                  ),
                 ),
               ),
-            ),
           ],
         ],
       ),
@@ -374,6 +409,104 @@ class _GradeCard extends StatelessWidget {
   }
 }
 
+// ─── Grade List Card ───────────────────────────────────────────────────────────
+class _GradeListCard extends StatelessWidget {
+  final GradeLevel gradeLevel;
+  const _GradeListCard({required this.gradeLevel});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = AppColors.gradeColors[(gradeLevel.grade - 1) % 12];
+    final bookCount = gradeLevel.textbooks.length;
+
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      elevation: 0,
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => GradeDetailScreen(grade: gradeLevel.grade),
+            ),
+          );
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.divider, width: 1.5),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.08),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(Icons.menu_book_outlined, color: color, size: 24),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: color.withValues(alpha: 0.12),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              gradeLevel.label,
+                              style: AppTheme.outfit(
+                                color: color,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            bookCount == 0 ? 'ምንም ትምህርት የለም' : '$bookCount ትምህርቶች',
+                            style: AppTheme.outfit(
+                              fontSize: 11,
+                              color: bookCount == 0 ? AppColors.textHint : AppColors.textLight,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        gradeLevel.category,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.outfit(
+                          fontSize: 14,
+                          color: AppColors.textMedium,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Icon(Icons.chevron_right_rounded, color: color.withValues(alpha: 0.5), size: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 // ─── Search Result Card ─────────────────────────────────────────────────────────
 class _SearchTextbookCard extends StatelessWidget {
   final Textbook textbook;
@@ -394,17 +527,7 @@ class _SearchTextbookCard extends StatelessWidget {
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => GradeDetailScreen(
-                  grade: textbook.grade,
-                  initialSelectedSubjectId: textbook.subjectId,
-                ),
-              ),
-            );
-          },
+          onTap: () => openTextbook(context, textbook),
           borderRadius: BorderRadius.circular(16),
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -550,17 +673,7 @@ class _DailyQuoteSection extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => GradeDetailScreen(
-                      grade: dailyBook.grade,
-                      initialSelectedSubjectId: dailyBook.subjectId,
-                    ),
-                  ),
-                );
-              },
+              onPressed: () => openTextbook(context, dailyBook),
               icon: const Icon(Icons.menu_book_rounded, size: 16),
               label: const Text('ማንበብ ይጀምሩ'),
               style: ElevatedButton.styleFrom(
@@ -651,17 +764,7 @@ class _RecentReadingsSection extends StatelessWidget {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(16),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => GradeDetailScreen(
-                            grade: book.grade,
-                            initialSelectedSubjectId: book.subjectId,
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: () => openTextbook(context, book, gradeColor: gradeColor),
                     child: Padding(
                       padding: const EdgeInsets.all(12),
                       child: Row(
