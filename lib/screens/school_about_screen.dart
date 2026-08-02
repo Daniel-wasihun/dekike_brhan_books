@@ -3,8 +3,36 @@ import 'package:provider/provider.dart';
 import '../theme/app_theme.dart';
 import '../data/school_provider.dart';
 
-class SchoolAboutScreen extends StatelessWidget {
+class SchoolAboutScreen extends StatefulWidget {
   const SchoolAboutScreen({super.key});
+  @override
+  State<SchoolAboutScreen> createState() => _SchoolAboutScreenState();
+}
+
+class _SchoolAboutScreenState extends State<SchoolAboutScreen> {
+  late final ScrollController _scrollCtrl;
+  bool _isCollapsed = false;
+
+  // expandedHeight is 280
+  static const double _collapseThreshold = 280 - kToolbarHeight;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollCtrl = ScrollController();
+    _scrollCtrl.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final collapsed = _scrollCtrl.offset >= _collapseThreshold;
+    if (collapsed != _isCollapsed) setState(() => _isCollapsed = collapsed);
+  }
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
 
   static const _pillars = [
     (icon: Icons.menu_book_rounded, title: 'ቅዱሳት መጻሕፍት', desc: 'ብሉይና ሐዲስ ኪዳን ጥናት'),
@@ -18,7 +46,7 @@ class SchoolAboutScreen extends StatelessWidget {
   static const _infoItems = [
     (icon: Icons.location_on_rounded, label: 'አድራሻ', value: 'ኩራጂዳ ክፍለ ከተማ፣ ሸገር ከተማ'),
     (icon: Icons.church_rounded, label: 'ቤተ ክርስቲያን', value: 'መንበረ ብርሃን ቅ/ሥላሴ ቤ/ክ'),
-    (icon: Icons.book_rounded, label: 'ሰ/ት/ቤት ስም', value: 'ደቂቀ ብርሃን ሰ/ት/ቤት'),
+    (icon: Icons.book_rounded, label: 'ሰንበት ት/ቤት ስም', value: 'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት'),
     (icon: Icons.account_balance_rounded, label: 'ቤተ ክርስቲያን ዓይነት', value: 'ኢ/ኦ/ተ/ቤ/ክ'),
     (icon: Icons.layers_rounded, label: 'የትምህርት ደረጃዎች', value: 'ከ፩ኛ እስከ ፲፪ኛ ክፍል'),
   ];
@@ -29,6 +57,7 @@ class SchoolAboutScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.bg,
       body: CustomScrollView(
+        controller: _scrollCtrl,
         slivers: [
           // ─── Gradient Hero Header ─────────────────────────────
           SliverAppBar(
@@ -37,6 +66,36 @@ class SchoolAboutScreen extends StatelessWidget {
             stretch: true,
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
+            title: _isCollapsed
+                ? Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.accent.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.auto_stories_rounded,
+                          color: AppColors.accent,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                          style: AppTheme.outfit(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
             actions: [
               IconButton(
                 icon: Icon(
@@ -99,7 +158,7 @@ class SchoolAboutScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 32),
                         child: Text(
-                          'ሰ/ት/ቤት',
+                          'ሰንበት ትምህርት ቤት',
                           textAlign: TextAlign.center,
                           style: AppTheme.outfit(
                             color: Colors.white.withValues(alpha: 0.85),
@@ -172,12 +231,12 @@ class SchoolAboutScreen extends StatelessWidget {
                   const SizedBox(height: 20),
 
                   // ── About us text ────────────────────────────
-                  _SectionTitle(title: 'ስለ ሰ/ት/ቤታችን'),
+                  _SectionTitle(title: 'ስለ ሰንበት ትምህርት ቤታችን'),
                   const SizedBox(height: 12),
                   _card(
                     context,
                     child: Text(
-                      'ደቂቀ ብርሃን ሰ/ት/ቤት የሚንቀሳቀሰው በኢትዮጵያ ኦርቶዶክስ ተዋህዶ ቤተ ክርስቲያን ሥር ሲሆን፣ ሸገር ከተማ ኩራጂዳ ክፍለ ከተማ ውስጥ በምትገኘው በመንበረ ብርሃን ቅ/ሥላሴ ቤተ ክርስቲያን ስር ይሰራል። ዓላማው ወጣቱ ትውልድ ቅዱሳት መጻሕፍትን፣ የቤተ ክርስቲያን ሥርዓቶችን፣ ታሪክን፣ ዜማን እና ክርስቲያናዊ ሥነ ምግባርን ጠለቅ ብሎ እንዲማር ማድረግ ነው። ይህ ዲጂታል መጽሐፍ ቤት ተማሪዎች ትምህርቶቻቸውን ዩዲ ላይ ሆኖ ቀላሉ ሁኔታ እንዲያነቡ የተሰናዳ ነው።',
+                      'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት በሸገር ከተማ፣ ኩራጂዳ ክፍለ ከተማ በሚገኘው በመንበረ ብርሃን ቅድስት ሥላሴ ቤተ ክርስቲያን ጥላ ሥር ሆኖ መንፈሳዊ አገልግሎት የሚሰጥ ተቋም ነው።\n\nዋና ዓላማውም ብሩህ የሆነውን ወጣት ትውልድ በኦርቶዶክሳዊት ተዋሕዶ ሃይማኖት ዶግማ፣ ቀኖና እና ትውፊት አንጾ ማሳደግ ነው። ይህ ዘመናዊ ዲጂታል ቤተ መጻሕፍት የተዘጋጀው መምህራንና ተማሪዎች መንፈሳዊ ትምህርታቸውን፣ የቤተ ክርስቲያን ታሪክን፣ ሥርዓትንና የቅዱሳት መጻሕፍት ጥናትን በየትኛውም ቦታና ጊዜ በቀላሉ እና በተመቻቸ ሁኔታ እንዲያገኙ ለማስቻል ነው።',
                       style: AppTheme.outfit(
                         fontSize: 14,
                         color: context.textMediumColor,
@@ -218,35 +277,6 @@ class SchoolAboutScreen extends StatelessWidget {
                               ),
                             ))
                         .toList(),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // ── App version note ─────────────────────────
-                  Container(
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.04),
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(
-                          color: AppColors.primary.withValues(alpha: 0.15)),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(Icons.info_outline_rounded,
-                            color: AppColors.primary, size: 18),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'ሁሉም ይዘቶች ከ assets/library.json ፋይል ይጫናሉ። አዲስ መጽሐፍ ለማከል ፋይሉን ብቻ ያዘምኑ።',
-                            style: AppTheme.outfit(
-                              fontSize: 12,
-                              color: context.textMediumColor,
-                              height: 1.4,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),
