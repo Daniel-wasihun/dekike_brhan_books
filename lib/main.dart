@@ -52,7 +52,7 @@ class SundaySchoolApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<SchoolProvider>();
     return MaterialApp(
-      title: 'Sunday School Library',
+      title: 'ደቂቀ ብርሃን ቤተ መጽሐፍት',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -174,7 +174,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'ሰንበት ትምህርት ቤት',
+                      'ቤተ መጽሐፍት',
                       style: AppTheme.outfit(
                           fontSize: 20,
                           color: AppColors.accentLight,
@@ -183,7 +183,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'የማስተማሪያ መጻሕፍት',
+                      'መንፈሳዊ መጻሕፍት',
                       style: AppTheme.outfit(
                           fontSize: 16,
                           color: AppColors.accentLight,

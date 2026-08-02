@@ -89,7 +89,7 @@ class _BookmarksScreenState extends State<BookmarksScreen> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: Text(
-                              'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                              'ደቂቀ ብርሃን ቤተ መጽሐፍት',
                               style: AppTheme.outfit(
                                 color: Colors.white,
                                 fontSize: 18,

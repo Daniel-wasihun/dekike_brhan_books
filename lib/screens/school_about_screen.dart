@@ -46,7 +46,7 @@ class _SchoolAboutScreenState extends State<SchoolAboutScreen> {
   static const _infoItems = [
     (icon: Icons.location_on_rounded, label: 'አድራሻ', value: 'ኩራጂዳ ክፍለ ከተማ፣ ሸገር ከተማ'),
     (icon: Icons.church_rounded, label: 'ቤተ ክርስቲያን', value: 'መንበረ ብርሃን ቅ/ሥላሴ ቤ/ክ'),
-    (icon: Icons.book_rounded, label: 'ሰንበት ት/ቤት ስም', value: 'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት'),
+    (icon: Icons.book_rounded, label: 'ሰንበት ት/ቤት ስም', value: 'ደቂቀ ብርሃን ቤተ መጽሐፍት'),
     (icon: Icons.account_balance_rounded, label: 'ቤተ ክርስቲያን ዓይነት', value: 'ኢ/ኦ/ተ/ቤ/ክ'),
     (icon: Icons.layers_rounded, label: 'የትምህርት ደረጃዎች', value: 'ከ፩ኛ እስከ ፲፪ኛ ክፍል'),
   ];
@@ -84,7 +84,7 @@ class _SchoolAboutScreenState extends State<SchoolAboutScreen> {
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                          'ደቂቀ ብርሃን ቤተ መጽሐፍት',
                           style: AppTheme.outfit(
                             color: Colors.white,
                             fontSize: 18,

@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                        'ደቂቀ ብርሃን ቤተ መጽሐፍት',
                         style: AppTheme.outfit(
                           color: Colors.white,
                           fontSize: 18,
