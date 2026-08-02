@@ -3,8 +3,18 @@ import 'package:flutter/services.dart' show rootBundle;
 import '../models/textbook.dart';
 
 /// Loads and parses the library.json asset file.
-/// This is the single source of truth — to add subjects or books,
-/// edit assets/library.json and hot-reload.
+///
+/// DATA CONTRACT
+/// ─────────────
+/// library.json must have two top-level arrays:
+///   "grades"   — grade-level textbooks (grade ≥ 1)
+///   "subjects" — grade-independent subject books (grade == 0)
+///
+/// Subject books may optionally declare an "asset_folder" field
+/// (defaults to "assets/books/") so they can live in their own
+/// directory (e.g. "assets/subjects/").
+///
+/// To add content: edit library.json and hot-reload.
 class LibraryLoader {
   static List<GradeLevel>? _grades;
   static List<Subject>? _subjects;
@@ -57,23 +67,59 @@ class LibraryLoader {
   }
 
   /// Total number of books across all grades and subjects.
-  static int get totalBooks {
-    return allBooks.length;
-  }
+  static int get totalBooks => allBooks.length;
 
   /// All books across all grades and subjects.
   static List<Textbook> get allBooks {
     final books = <Textbook>[];
-    for (final grade in allGrades) {
-      books.addAll(grade.textbooks);
-    }
-    for (final subject in allSubjects) {
-      books.addAll(subject.textbooks);
-    }
+    for (final grade in allGrades) books.addAll(grade.textbooks);
+    for (final subject in allSubjects) books.addAll(subject.textbooks);
     return books;
   }
 
-  /// Search across title, subject name, description, and grade.
+  /// All grade-independent subject books (grade == 0).
+  static List<Textbook> get allSubjectBooks {
+    final books = <Textbook>[];
+    for (final subject in allSubjects) books.addAll(subject.textbooks);
+    return books;
+  }
+
+  /// Only subjects that have at least one book.
+  static List<Subject> get subjectsWithBooks =>
+      allSubjects.where((s) => s.hasBooks).toList();
+
+  /// Total book count across all subjects.
+  static int get totalSubjectBooks => allSubjectBooks.length;
+
+  /// Search grade books only (grade >= 1).
+  static List<Textbook> searchGradeBooks(String query) {
+    final q = query.trim().toLowerCase();
+    if (q.isEmpty) return [];
+    return [
+      for (final g in allGrades)
+        for (final t in g.textbooks)
+          if (t.title.toLowerCase().contains(q) ||
+              t.description.toLowerCase().contains(q) ||
+              'ክፍል ${t.grade}'.contains(q))
+            t,
+    ];
+  }
+
+  /// Search subject books only (grade == 0).
+  static List<Textbook> searchSubjectBooks(String query) {
+    final q = query.trim().toLowerCase();
+    if (q.isEmpty) return [];
+    return [
+      for (final s in allSubjects)
+        for (final t in s.textbooks)
+          if (t.title.toLowerCase().contains(q) ||
+              t.description.toLowerCase().contains(q) ||
+              s.name.toLowerCase().contains(q))
+            t,
+    ];
+  }
+
+  /// Search across ALL books (grades + subjects).
   static List<Textbook> search(String query) {
     final q = query.trim().toLowerCase();
     if (q.isEmpty) return [];
@@ -82,7 +128,7 @@ class LibraryLoader {
       return t.title.toLowerCase().contains(q) ||
           t.description.toLowerCase().contains(q) ||
           (subject?.name.toLowerCase().contains(q) ?? false) ||
-          'grade ${t.grade}'.contains(q);
+          (t.grade > 0 ? 'ክፍል ${t.grade}'.contains(q) : false);
     }).toList();
   }
 

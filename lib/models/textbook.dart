@@ -46,12 +46,18 @@ class Textbook {
   String get assetPath => file;
 }
 
-/// Represents a subject category.
+/// Represents a subject category (grade-independent educational books).
 class Subject {
   final String id;
   final String name;
   final String emoji;
   final String description;
+
+  /// The asset folder where this subject's PDFs live.
+  /// Defaults to 'assets/books/' for backward compatibility.
+  /// Set to 'assets/subjects/' (or any subfolder) for new subject books.
+  final String assetFolder;
+
   final List<Textbook> textbooks;
 
   const Subject({
@@ -59,11 +65,14 @@ class Subject {
     required this.name,
     required this.emoji,
     required this.description,
+    this.assetFolder = 'assets/books/',
     required this.textbooks,
   });
 
   factory Subject.fromJson(Map<String, dynamic> json) {
     final rawBooks = json['books'] as List<dynamic>? ?? [];
+    final assetFolder =
+        json['asset_folder'] as String? ?? 'assets/books/';
     final books = rawBooks
         .map((b) => Textbook.fromJson(b as Map<String, dynamic>, 0))
         .toList();
@@ -73,10 +82,15 @@ class Subject {
       name: json['name'] as String,
       emoji: json['emoji'] as String? ?? '📖',
       description: json['description'] as String? ?? '',
+      assetFolder: assetFolder,
       textbooks: books,
     );
   }
+
+  int get bookCount => textbooks.length;
+  bool get hasBooks => textbooks.isNotEmpty;
 }
+
 
 /// Represents a grade level containing textbooks.
 class GradeLevel {
