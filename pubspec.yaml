@@ -11,6 +11,10 @@ dependencies:
     sdk: flutter
   provider: ^6.1.2
   url_launcher: ^6.3.1
+  flutter_local_notifications: ^17.2.2
+  timezone: ^0.9.4
+  syncfusion_flutter_pdfviewer: ^33.2.13
+  path_provider: ^2.1.4
 
 dev_dependencies:
   flutter_test:
@@ -22,3 +26,16 @@ flutter:
   assets:
     - assets/library.json
     - assets/books/
+    - assets/subjects/
+    - assets/grade_1/
+    - assets/grade_2/
+    - assets/grade_3/
+    - assets/grade_4/
+    - assets/grade_5/
+    - assets/grade_6/
+    - assets/grade_7/
+    - assets/grade_8/
+    - assets/grade_9/
+    - assets/grade_10/
+    - assets/grade_11/
+    - assets/grade_12/
