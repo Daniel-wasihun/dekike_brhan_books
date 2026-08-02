@@ -8,10 +8,35 @@
       "emoji": "✝️",
       "description": "ቅዱሳት መጻሕፍት፣ የመጽሐፍ ቅዱስ ታሪኮች፣ እና ክርስቲያናዊ ትምህርቶች",
       "books": [
-        {"id": "sub_bible_1", "title": "የብሉይ ኪዳን መግቢያ", "subject_id": "bible_study", "file": "assets/books/mock_bible_1.pdf", "file_type": "pdf", "description": "የብሉይ ኪዳን ቅዱሳት መጻሕፍት መግቢያና ጥናት", "language": "am"},
-        {"id": "sub_bible_2", "title": "የሐዲስ ኪዳን መግቢያ", "subject_id": "bible_study", "file": "assets/books/mock_bible_2.pdf", "file_type": "pdf", "description": "የሐዲስ ኪዳን ወንጌላትና መልእክታት ጥናት", "language": "am"},
-        {"id": "sub_bible_3", "title": "የዳዊት መዝሙር ትርጓሜ", "subject_id": "bible_study", "file": "assets/books/mock_bible_3.pdf", "file_type": "pdf", "description": "የመዝሙረ ዳዊት ምሥጢራዊ ትርጓሜና ጥናት", "language": "am"}
-      ]
+        {
+          "id": "sub_bible_1",
+          "title": "የብሉይ ኪዳን መግቢያ",
+          "subject_id": "bible_study",
+          "file": "assets/subjects/mock_bible_1.pdf",
+          "file_type": "pdf",
+          "description": "የብሉይ ኪዳን ቅዱሳት መጻሕፍት መግቢያና ጥናት",
+          "language": "am"
+        },
+        {
+          "id": "sub_bible_2",
+          "title": "የሐዲስ ኪዳን መግቢያ",
+          "subject_id": "bible_study",
+          "file": "assets/subjects/mock_bible_2.pdf",
+          "file_type": "pdf",
+          "description": "የሐዲስ ኪዳን ወንጌላትና መልእክታት ጥናት",
+          "language": "am"
+        },
+        {
+          "id": "sub_bible_3",
+          "title": "የዳዊት መዝሙር ትርጓሜ",
+          "subject_id": "bible_study",
+          "file": "assets/subjects/mock_bible_3.pdf",
+          "file_type": "pdf",
+          "description": "የመዝሙረ ዳዊት ምሥጢራዊ ትርጓሜና ጥናት",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
     },
     {
       "id": "liturgy_hymns",
@@ -19,10 +44,35 @@
       "emoji": "🎶",
       "description": "መንፈሳዊ መዝሙሮች፣ የዜማ ትምህርቶች እና የቤተ ክርስቲያን ሥርዓት",
       "books": [
-        {"id": "sub_liturgy_1", "title": "ሥርዓተ ቅዳሴ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_1.pdf", "file_type": "pdf", "description": "የቤተ ክርስቲያን ሥርዓተ ቅዳሴ ትርጓሜ", "language": "am"},
-        {"id": "sub_liturgy_2", "title": "የቅዱስ ያሬድ ዜማዎች", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_2.pdf", "file_type": "pdf", "description": "የቅዱስ ያሬድ ዜማ ሥርዓት እና ዓይነቶች", "language": "am"},
-        {"id": "sub_liturgy_3", "title": "መዝሙረ ዳዊት በዜማ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_liturgy_3.pdf", "file_type": "pdf", "description": "መዝሙረ ዳዊት የዜማ ትምህርት", "language": "am"}
-      ]
+        {
+          "id": "sub_liturgy_1",
+          "title": "ሥርዓተ ቅዳሴ",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/subjects/mock_liturgy_1.pdf",
+          "file_type": "pdf",
+          "description": "የቤተ ክርስቲያን ሥርዓተ ቅዳሴ ትርጓሜ",
+          "language": "am"
+        },
+        {
+          "id": "sub_liturgy_2",
+          "title": "የቅዱስ ያሬድ ዜማዎች",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/subjects/mock_liturgy_2.pdf",
+          "file_type": "pdf",
+          "description": "የቅዱስ ያሬድ ዜማ ሥርዓት እና ዓይነቶች",
+          "language": "am"
+        },
+        {
+          "id": "sub_liturgy_3",
+          "title": "መዝሙረ ዳዊት በዜማ",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/subjects/mock_liturgy_3.pdf",
+          "file_type": "pdf",
+          "description": "መዝሙረ ዳዊት የዜማ ትምህርት",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
     },
     {
       "id": "christian_ethics",
@@ -30,9 +80,26 @@
       "emoji": "🕊️",
       "description": "መንፈሳዊ ሕይወት፣ መልካም ሥነ ምግባር እና መንፈሳዊ አገልግሎት",
       "books": [
-        {"id": "sub_ethics_1", "title": "ክርስቲያናዊ ሥነ ምግባር መሠረት", "subject_id": "christian_ethics", "file": "assets/books/mock_ethics_1.pdf", "file_type": "pdf", "description": "የክርስቲያን ሕይወት መሠረታዊ ሥነ ምግባር ትምህርት", "language": "am"},
-        {"id": "sub_ethics_2", "title": "የፍቅርና የይቅርታ ትምህርት", "subject_id": "christian_ethics", "file": "assets/books/mock_ethics_2.pdf", "file_type": "pdf", "description": "ስለ ክርስቲያናዊ ፍቅር፣ ይቅርታ እና ትሕትና", "language": "am"}
-      ]
+        {
+          "id": "sub_ethics_1",
+          "title": "ክርስቲያናዊ ሥነ ምግባር መሠረት",
+          "subject_id": "christian_ethics",
+          "file": "assets/subjects/mock_ethics_1.pdf",
+          "file_type": "pdf",
+          "description": "የክርስቲያን ሕይወት መሠረታዊ ሥነ ምግባር ትምህርት",
+          "language": "am"
+        },
+        {
+          "id": "sub_ethics_2",
+          "title": "የፍቅርና የይቅርታ ትምህርት",
+          "subject_id": "christian_ethics",
+          "file": "assets/subjects/mock_ethics_2.pdf",
+          "file_type": "pdf",
+          "description": "ስለ ክርስቲያናዊ ፍቅር፣ ይቅርታ እና ትሕትና",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
     },
     {
       "id": "church_history",
@@ -40,10 +107,35 @@
       "emoji": "⛪",
       "description": "የቤተ ክርስቲያን ታሪክ፣ የቅዱሳን ታሪክ እና ጉልህ ኩነቶች",
       "books": [
-        {"id": "sub_history_1", "title": "የኢትዮጵያ ቤተ ክርስቲያን ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_1.pdf", "file_type": "pdf", "description": "ከጥንት እስከ ዘመናዊ ዘመን ያለው የቤተ ክርስቲያን ታሪክ", "language": "am"},
-        {"id": "sub_history_2", "title": "የሐዋርያት ሥራ ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_2.pdf", "file_type": "pdf", "description": "የቅዱሳን ሐዋርያት ሥራና ስብከት ታሪክ", "language": "am"},
-        {"id": "sub_history_3", "title": "የኢትዮጵያ ጻድቃን ታሪክ", "subject_id": "church_history", "file": "assets/books/mock_history_3.pdf", "file_type": "pdf", "description": "በኢትዮጵያ ቤተ ክርስቲያን የታወቁ ጻድቃንና ሰማዕታት", "language": "am"}
-      ]
+        {
+          "id": "sub_history_1",
+          "title": "የኢትዮጵያ ቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/subjects/mock_history_1.pdf",
+          "file_type": "pdf",
+          "description": "ከጥንት እስከ ዘመናዊ ዘመን ያለው የቤተ ክርስቲያን ታሪክ",
+          "language": "am"
+        },
+        {
+          "id": "sub_history_2",
+          "title": "የሐዋርያት ሥራ ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/subjects/mock_history_2.pdf",
+          "file_type": "pdf",
+          "description": "የቅዱሳን ሐዋርያት ሥራና ስብከት ታሪክ",
+          "language": "am"
+        },
+        {
+          "id": "sub_history_3",
+          "title": "የኢትዮጵያ ጻድቃን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/subjects/mock_history_3.pdf",
+          "file_type": "pdf",
+          "description": "በኢትዮጵያ ቤተ ክርስቲያን የታወቁ ጻድቃንና ሰማዕታት",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
     },
     {
       "id": "prayers_devotionals",
@@ -51,9 +143,26 @@
       "emoji": "🙏",
       "description": "የዘወትር ጸሎቶች፣ መንፈሳዊ ትምህርቶች እና አምልኮ",
       "books": [
-        {"id": "sub_prayer_1", "title": "የዘወትር ጸሎት መጽሐፍ", "subject_id": "prayers_devotionals", "file": "assets/books/mock_prayer_1.pdf", "file_type": "pdf", "description": "የዘወትር ጸሎታት ስብስብና ትርጓሜ", "language": "am"},
-        {"id": "sub_prayer_2", "title": "ውዳሴ ማርያም ትርጓሜ", "subject_id": "prayers_devotionals", "file": "assets/books/mock_prayer_2.pdf", "file_type": "pdf", "description": "የውዳሴ ማርያም ትርጓሜና ምሥጢር", "language": "am"}
-      ]
+        {
+          "id": "sub_prayer_1",
+          "title": "የዘወትር ጸሎት መጽሐፍ",
+          "subject_id": "prayers_devotionals",
+          "file": "assets/subjects/mock_prayer_1.pdf",
+          "file_type": "pdf",
+          "description": "የዘወትር ጸሎታት ስብስብና ትርጓሜ",
+          "language": "am"
+        },
+        {
+          "id": "sub_prayer_2",
+          "title": "ውዳሴ ማርያም ትርጓሜ",
+          "subject_id": "prayers_devotionals",
+          "file": "assets/subjects/mock_prayer_2.pdf",
+          "file_type": "pdf",
+          "description": "የውዳሴ ማርያም ትርጓሜና ምሥጢር",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
     },
     {
       "id": "inspirational",
@@ -61,64 +170,703 @@
       "emoji": "💡",
       "description": "መንፈሳዊ እድገት እና አነቃቂ መጻሕፍት",
       "books": [
-        {"id": "sub_inspire_1", "title": "መንፈሳዊ እድገት", "subject_id": "inspirational", "file": "assets/books/mock_inspire_1.pdf", "file_type": "pdf", "description": "ለመንፈሳዊ ሕይወት ዕድገት የሚረዱ ትምህርቶች", "language": "am"},
-        {"id": "sub_inspire_2", "title": "የአገልግሎት ጥሪ", "subject_id": "inspirational", "file": "assets/books/mock_inspire_2.pdf", "file_type": "pdf", "description": "ወጣቶችን ለመንፈሳዊ አገልግሎት ማዘጋጃ", "language": "am"}
-      ]
+        {
+          "id": "sub_inspire_1",
+          "title": "መንፈሳዊ እድገት",
+          "subject_id": "inspirational",
+          "file": "assets/subjects/mock_inspire_1.pdf",
+          "file_type": "pdf",
+          "description": "ለመንፈሳዊ ሕይወት ዕድገት የሚረዱ ትምህርቶች",
+          "language": "am"
+        },
+        {
+          "id": "sub_inspire_2",
+          "title": "የአገልግሎት ጥሪ",
+          "subject_id": "inspirational",
+          "file": "assets/subjects/mock_inspire_2.pdf",
+          "file_type": "pdf",
+          "description": "ወጣቶችን ለመንፈሳዊ አገልግሎት ማዘጋጃ",
+          "language": "am"
+        }
+      ],
+      "asset_folder": "assets/subjects/"
+    },
+    {
+      "id": "foundation_of_faith",
+      "name": "መሠረተ ሃይማኖት",
+      "emoji": "🏛️",
+      "description": "የሃይማኖት መሠረታዊ ትምህርቶች እና እምነት",
+      "books": [],
+      "asset_folder": "assets/subjects/"
+    },
+    {
+      "id": "geez_language",
+      "name": "ልሳነ ግእዝ",
+      "emoji": "🔠",
+      "description": "የግእዝ ቋንቋ እና ሰዋሰው ትምህርት",
+      "books": [],
+      "asset_folder": "assets/subjects/"
+    },
+    {
+      "id": "general_knowledge",
+      "name": "ጠቅላላ እውቀት",
+      "emoji": "🌍",
+      "description": "ልዩ ልዩ ጠቅላላ እውቀቶች እና ሌሎች ትምህርቶች",
+      "books": [],
+      "asset_folder": "assets/subjects/"
     }
   ],
   "grades": [
     {
-      "grade": 1, "label": "፩ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
+      "grade": 1,
+      "label": "፩ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "g1_book1", "title": "የኦርቶዶክስ ተዋሕዶ እምነትና ሥርዓት", "subject_id": "bible_study", "file": "assets/books/mock_g1_1.pdf", "file_type": "pdf", "description": "የ፩ኛ ክፍል መሠረታዊ ትምህርት", "language": "am"},
-        {"id": "g1_book2", "title": "የሕፃናት መጽሐፍ ቅዱስ ታሪኮች", "subject_id": "bible_study", "file": "assets/books/mock_g1_2.pdf", "file_type": "pdf", "description": "ለጀማሪዎች የተዘጋጁ ታሪኮች", "language": "am"},
-        {"id": "g1_book3", "title": "የመጀመሪያ ጸሎት ትምህርት", "subject_id": "prayers_devotionals", "file": "assets/books/mock_g1_3.pdf", "file_type": "pdf", "description": "ለ፩ኛ ክፍል የጸሎት ሥልጠና", "language": "am"}
+        {
+          "id": "g1_3db452b1",
+          "title": "ቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_1/g1_3db452b1.pdf",
+          "file_type": "pdf",
+          "description": "ለ1ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g1_a083ffe7",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_1/g1_a083ffe7.pdf",
+          "file_type": "pdf",
+          "description": "ለ1ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g1_fd1f7465",
+          "title": "ትምህርተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_1/g1_fd1f7465.pdf",
+          "file_type": "pdf",
+          "description": "ለ1ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g1_6021027b",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_1/g1_6021027b.pdf",
+          "file_type": "pdf",
+          "description": "ለ1ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g1_d4312ac3",
+          "title": "ሥርዓተ ቤተ ክርስቲያን",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_1/g1_d4312ac3.pdf",
+          "file_type": "pdf",
+          "description": "ለ1ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
     {
-      "grade": 2, "label": "፪ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
+      "grade": 2,
+      "label": "፪ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "g2_book1", "title": "ክርስቲያናዊ ሕይወትና ሥነ ምግባር", "subject_id": "christian_ethics", "file": "assets/books/mock_g2_1.pdf", "file_type": "pdf", "description": "የ፪ኛ ክፍል ሥነ ምግባር", "language": "am"},
-        {"id": "g2_book2", "title": "አሥሩ ትእዛዛት ለሕፃናት", "subject_id": "bible_study", "file": "assets/books/mock_g2_2.pdf", "file_type": "pdf", "description": "አሥርቱ ሕግጋት ማብራሪያ", "language": "am"},
-        {"id": "g2_book3", "title": "የታማኝነት ታሪኮች", "subject_id": "christian_ethics", "file": "assets/books/mock_g2_3.pdf", "file_type": "pdf", "description": "መንፈሳዊ ምሳሌዎችና ታሪኮች", "language": "am"}
+        {
+          "id": "g2_b5cf5933",
+          "title": "ቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_2/g2_b5cf5933.pdf",
+          "file_type": "pdf",
+          "description": "ለ2ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g2_837ce76b",
+          "title": "ቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_2/g2_837ce76b.pdf",
+          "file_type": "pdf",
+          "description": "ለ2ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g2_57c33d0f",
+          "title": "ሥርዓተ ቤተ ክርስቲያን",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_2/g2_57c33d0f.pdf",
+          "file_type": "pdf",
+          "description": "ለ2ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g2_626ab462",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_2/g2_626ab462.pdf",
+          "file_type": "pdf",
+          "description": "ለ2ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g2_1c25b51c",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_2/g2_1c25b51c.pdf",
+          "file_type": "pdf",
+          "description": "ለ2ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
     {
-      "grade": 3, "label": "፫ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
+      "grade": 3,
+      "label": "፫ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "g3_book1", "title": "ታሪከ ነገሥት ወሊቃውንት", "subject_id": "church_history", "file": "assets/books/mock_g3_1.pdf", "file_type": "pdf", "description": "ሊቃውንትና ታሪክ መማሪያ", "language": "am"},
-        {"id": "g3_book2", "title": "የቅዱስ ያሬድ ዜማ መሠረቶች", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g3_2.pdf", "file_type": "pdf", "description": "የዜማ ሥርዓቶች መግቢያ", "language": "am"}
+        {
+          "id": "g3_81b0a03c",
+          "title": "የመጽሐፍ ቅዱስ ታሪክ",
+          "subject_id": "bible_study",
+          "file": "assets/grade_3/g3_81b0a03c.pdf",
+          "file_type": "pdf",
+          "description": "ለ3ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g3_54f55e63",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_3/g3_54f55e63.pdf",
+          "file_type": "pdf",
+          "description": "ለ3ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g3_10cd5848",
+          "title": "ክርስቲያናዊ ስነምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_3/g3_10cd5848.pdf",
+          "file_type": "pdf",
+          "description": "ለ3ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g3_7269de34",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_3/g3_7269de34.pdf",
+          "file_type": "pdf",
+          "description": "ለ3ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
     {
-      "grade": 4, "label": "፬ኛ ክፍል", "category": "የጀማሪ ሰንበት ትምህርት ቤት",
+      "grade": 4,
+      "label": "፬ኛ ክፍል",
+      "category": "የጀማሪ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "g4_book1", "title": "ሥርዓተ ማኅሌት ወቅዳሴ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g4_1.pdf", "file_type": "pdf", "description": "ሥርዓተ ዜማና ቅዳሴ", "language": "am"},
-        {"id": "g4_book2", "title": "የቅዳሴ ጸሎት ትርጓሙ", "subject_id": "liturgy_hymns", "file": "assets/books/mock_g4_2.pdf", "file_type": "pdf", "description": "ቅዳሴና ትንተና", "language": "am"}
+        {
+          "id": "g4_6ce78de6",
+          "title": "ሥርዓተ ቤተክርስቲያን",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_4/g4_6ce78de6.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_eeef7253",
+          "title": "የቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_4/g4_eeef7253.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_242cf4ee",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_4/g4_242cf4ee.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_d4aa8e06",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_4/g4_d4aa8e06.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_041f8ffd",
+          "title": "ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_4/g4_041f8ffd.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_c6a44ed0",
+          "title": "የቅዱሳት መጻሕፍት ጥናት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_4/g4_c6a44ed0.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g4_21e94b88",
+          "title": "መሠረተ ሃይማኖት ነገረ ማርያም",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_4/g4_21e94b88.pdf",
+          "file_type": "pdf",
+          "description": "ለ4ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
-    {"grade": 5, "label": "፭ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
-    {"grade": 6, "label": "፮ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
-    {"grade": 7, "label": "፯ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
-    {"grade": 8, "label": "፰ኛ ክፍል", "category": "የመካከለኛ ሰንበት ትምህርት ቤት", "books": []},
     {
-      "grade": 9, "label": "፱ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 5,
+      "label": "፭ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "habib_giyorgis_9", "title": "ቅዱስ ሐቢብ ጊዮርጊስ — ሕይወቱና ትምህርቱ", "subject_id": "church_history", "file": "assets/books/habib_giyorgis.pdf", "file_type": "pdf", "description": "የሰንበት ት/ቤት መስራች ታሪክ", "language": "am"}
+        {
+          "id": "g5_8bcc8f40",
+          "title": "ቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_5/g5_8bcc8f40.pdf",
+          "file_type": "pdf",
+          "description": "ለ5ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g5_376a62ec",
+          "title": "የቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_5/g5_376a62ec.pdf",
+          "file_type": "pdf",
+          "description": "ለ5ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g5_7428d727",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_5/g5_7428d727.pdf",
+          "file_type": "pdf",
+          "description": "ለ5ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g5_3dd51066",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_5/g5_3dd51066.pdf",
+          "file_type": "pdf",
+          "description": "ለ5ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g5_0e6fbca9",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_5/g5_0e6fbca9.pdf",
+          "file_type": "pdf",
+          "description": "ለ5ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
     {
-      "grade": 10, "label": "፲ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 6,
+      "label": "፮ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "modern_orthodox_10", "title": "ዘመናዊ የኦርቶዶክስ አስተማሪዎች", "subject_id": "church_history", "file": "assets/books/modern_orthodox_thinkers.pdf", "file_type": "pdf", "description": "ዘመናዊ ኦርቶዶክስ አሳቢያን", "language": "am"}
+        {
+          "id": "g6_fc793549",
+          "title": "ቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_6/g6_fc793549.pdf",
+          "file_type": "pdf",
+          "description": "ለ6ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g6_79057fd0",
+          "title": "ሥነ-ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_6/g6_79057fd0.pdf",
+          "file_type": "pdf",
+          "description": "ለ6ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g6_309e68a1",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_6/g6_309e68a1.pdf",
+          "file_type": "pdf",
+          "description": "ለ6ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g6_b1e1f590",
+          "title": "ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_6/g6_b1e1f590.pdf",
+          "file_type": "pdf",
+          "description": "ለ6ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g6_73165abf",
+          "title": "የቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_6/g6_73165abf.pdf",
+          "file_type": "pdf",
+          "description": "ለ6ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
     {
-      "grade": 11, "label": "፲፩ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "grade": 7,
+      "label": "፯ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
       "books": [
-        {"id": "eat_that_frog_11", "title": "Eat That Frog — የአማርኛ ትርጉም", "subject_id": "inspirational", "file": "assets/books/eat_that_frog_amharic.pdf", "file_type": "pdf", "description": "ጊዜ አጠቃቀምና ዓላማ ማሳካት", "language": "am"}
+        {
+          "id": "g7_c95dc0be",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_7/g7_c95dc0be.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g7_2dca9f55",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_7/g7_2dca9f55.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g7_6a86d787",
+          "title": "የቤተክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_7/g7_6a86d787.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g7_d9707ca3",
+          "title": "የቅዱሳት መጻሕፍት ጥናት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_7/g7_d9707ca3.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g7_7af36365",
+          "title": "የቅዱሳት መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_7/g7_7af36365.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g7_20f76b23",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_7/g7_20f76b23.pdf",
+          "file_type": "pdf",
+          "description": "ለ7ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
       ]
     },
-    {"grade": 12, "label": "፲፪ኛ ክፍል", "category": "የከፍተኛ ሰንበት ትምህርት ቤት", "books": []}
+    {
+      "grade": 8,
+      "label": "፰ኛ ክፍል",
+      "category": "የመካከለኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {
+          "id": "g8_994af30d",
+          "title": "ቅዱሳት መጻሕፍት ጥናት ስምንተኛ",
+          "subject_id": "bible_study",
+          "file": "assets/grade_8/g8_994af30d.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g8_9ea6dd55",
+          "title": "መሠረተ ሀይማኖት ነገረ ድኅነት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_8/g8_9ea6dd55.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g8_fd8114ba",
+          "title": "የቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_8/g8_fd8114ba.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g8_f2840f96",
+          "title": "ሥርዓተ ቤተ ክርስቲያን",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_8/g8_f2840f96.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g8_66445fc6",
+          "title": "ክርስቲያናዊ ሥነ ምግባር",
+          "subject_id": "christian_ethics",
+          "file": "assets/grade_8/g8_66445fc6.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g8_26e64f67",
+          "title": "መሠረተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_8/g8_26e64f67.pdf",
+          "file_type": "pdf",
+          "description": "ለ8ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
+      ]
+    },
+    {
+      "grade": 9,
+      "label": "፱ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {
+          "id": "g9_32486d7e",
+          "title": "ክርስቲያናዊ ሥነ  ምግባር",
+          "subject_id": "inspirational",
+          "file": "assets/grade_9/g9_32486d7e.pdf",
+          "file_type": "pdf",
+          "description": "ለ9ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g9_cf26d545",
+          "title": "ሥርዓተ ቤተ ክርስቲያን",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_9/g9_cf26d545.pdf",
+          "file_type": "pdf",
+          "description": "ለ9ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g9_fcb1a663",
+          "title": "ቅዱሳት መጻሕፍት ጥናት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_9/g9_fcb1a663.pdf",
+          "file_type": "pdf",
+          "description": "ለ9ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g9_6621e087",
+          "title": "ትምህርተ ሃይማኖት",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_9/g9_6621e087.pdf",
+          "file_type": "pdf",
+          "description": "ለ9ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g9_b7315026",
+          "title": "ቅዱሳት መጻሕፍት ጥናት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_9/g9_b7315026.pdf",
+          "file_type": "pdf",
+          "description": "ለ9ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
+      ]
+    },
+    {
+      "grade": 10,
+      "label": "፲ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {
+          "id": "g10_6856471c",
+          "title": "ሥርዐተ ቤተ ክርስቲያን  (የቤተ ክርስቲያን አስተዳደር)",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_10/g10_6856471c.pdf",
+          "file_type": "pdf",
+          "description": "ለ10ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g10_ca876e40",
+          "title": "የኢትዮጵያ ቤተ ክርስቲያን ታሪክ",
+          "subject_id": "church_history",
+          "file": "assets/grade_10/g10_ca876e40.pdf",
+          "file_type": "pdf",
+          "description": "ለ10ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g10_27242607",
+          "title": "ሥራ አመራር",
+          "subject_id": "general_knowledge",
+          "file": "assets/grade_10/g10_27242607.pdf",
+          "file_type": "pdf",
+          "description": "ለ10ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g10_6e700256",
+          "title": "የቅዱሳት መጽሐፍ ጥናት መጽሐፈ መነኮሳት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_10/g10_6e700256.pdf",
+          "file_type": "pdf",
+          "description": "ለ10ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g10_67a0daa2",
+          "title": "ጥናትና ምርምር",
+          "subject_id": "general_knowledge",
+          "file": "assets/grade_10/g10_67a0daa2.pdf",
+          "file_type": "pdf",
+          "description": "ለ10ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
+      ]
+    },
+    {
+      "grade": 11,
+      "label": "፲፩ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {
+          "id": "g11_1a1e77d8",
+          "title": "ቅዱሳት መጻሕፍት መጻሕፍተ ሊቃውንት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_11/g11_1a1e77d8.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g11_7c1b53a6",
+          "title": "ኦርቶዶክሳዊ የጾታ ትምህርት",
+          "subject_id": "inspirational",
+          "file": "assets/grade_11/g11_7c1b53a6.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g11_9345b422",
+          "title": "ሥርዓተ ቤተ ክርስቲያን ኦርቶዶክሳዊ የስብከት ዘዴ",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_11/g11_9345b422.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g11_31becf27",
+          "title": "መሠረተ ሃይማኖት (ዕቅበተ እምነት)",
+          "subject_id": "foundation_of_faith",
+          "file": "assets/grade_11/g11_31becf27.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g11_1614ca2d",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_11/g11_1614ca2d.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g11_afe36d0c",
+          "title": "ጠቅላላ እውቀት ሥነ ልቡና መግቢያ",
+          "subject_id": "general_knowledge",
+          "file": "assets/grade_11/g11_afe36d0c.pdf",
+          "file_type": "pdf",
+          "description": "ለ11ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
+      ]
+    },
+    {
+      "grade": 12,
+      "label": "፲፪ኛ ክፍል",
+      "category": "የከፍተኛ ሰንበት ትምህርት ቤት",
+      "books": [
+        {
+          "id": "g12_b33e4d64",
+          "title": "ሥርዓተ ቤተክርስቲያን  ሥርዓተ ቅዳሴ",
+          "subject_id": "liturgy_hymns",
+          "file": "assets/grade_12/g12_b33e4d64.pdf",
+          "file_type": "pdf",
+          "description": "ለ12ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g12_e0332a24",
+          "title": "የቤተ ክርስትያን ትምህርተ አበው",
+          "subject_id": "church_history",
+          "file": "assets/grade_12/g12_e0332a24.pdf",
+          "file_type": "pdf",
+          "description": "ለ12ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g12_ccb8eaab",
+          "title": "ቅዱሳት መጻሕፍት አዋልድ ትምህርተ አበው መጻሕፍት",
+          "subject_id": "bible_study",
+          "file": "assets/grade_12/g12_ccb8eaab.pdf",
+          "file_type": "pdf",
+          "description": "ለ12ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        },
+        {
+          "id": "g12_6f15eece",
+          "title": "ልሳነ ግእዝ",
+          "subject_id": "geez_language",
+          "file": "assets/grade_12/g12_6f15eece.pdf",
+          "file_type": "pdf",
+          "description": "ለ12ኛ ክፍል የተዘጋጀ መጽሐፍ",
+          "language": "am"
+        }
+      ]
+    }
   ]
 }
