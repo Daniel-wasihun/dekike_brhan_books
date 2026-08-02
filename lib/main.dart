@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,27 +9,41 @@ import 'screens/home_screen.dart';
 import 'screens/bookmarks_screen.dart';
 import 'screens/about_screen.dart';
 import 'screens/school_about_screen.dart';
+import 'services/notification_service.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Load the JSON library config before the app starts
-  await LibraryLoader.load();
+    // Load the JSON library config before the app starts
+    await LibraryLoader.load();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => SchoolProvider(),
-      child: const SundaySchoolApp(),
-    ),
-  );
+    // Initialize prayer time notification service - wrapped in try/catch
+    // to prevent notification setup failures from crashing the whole app
+    try {
+      await NotificationService.initialize();
+    } catch (e, st) {
+      debugPrint('NotificationService init failed (non-fatal): $e\n$st');
+    }
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
+    runApp(
+      ChangeNotifierProvider(
+        create: (_) => SchoolProvider(),
+        child: const SundaySchoolApp(),
+      ),
+    );
+  }, (error, stack) {
+    debugPrint('Uncaught error: $error\n$stack');
+  });
 }
+
 
 class SundaySchoolApp extends StatelessWidget {
   const SundaySchoolApp({super.key});
@@ -150,12 +165,21 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      'ሰንበት ትምህርት ቤት',
+                      'ደቂቀ ብርሃን',
                       style: AppTheme.outfit(
-                          fontSize: 26,
+                          fontSize: 30,
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 4),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'ሰንበት ትምህርት ቤት',
+                      style: AppTheme.outfit(
+                          fontSize: 20,
+                          color: AppColors.accentLight,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 3),
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -309,46 +333,52 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? AppColors.primary.withValues(alpha: 0.06)
-              : Colors.transparent,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Badge(
-              isLabelVisible: badgeCount > 0,
-              label: Text(
-                '$badgeCount',
-                style: const TextStyle(fontSize: 9),
-              ),
-              backgroundColor: AppColors.accent,
-              child: Icon(
-                isSelected ? activeIcon : icon,
-                color: isSelected ? (context.isDark ? AppColors.accent : AppColors.primary) : context.textMediumColor,
-                size: 24,
-              ),
-            ),
-            if (isSelected) ...[
-              const SizedBox(width: 8),
-              Text(
-                label,
-                style: AppTheme.outfit(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: context.isDark ? AppColors.accent : AppColors.primary,
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+          decoration: BoxDecoration(
+            color: isSelected
+                ? AppColors.primary.withValues(alpha: 0.06)
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Badge(
+                isLabelVisible: badgeCount > 0,
+                label: Text(
+                  '$badgeCount',
+                  style: const TextStyle(fontSize: 9),
+                ),
+                backgroundColor: AppColors.accent,
+                child: Icon(
+                  isSelected ? activeIcon : icon,
+                  color: isSelected ? (context.isDark ? AppColors.accent : AppColors.primary) : context.textMediumColor,
+                  size: 24,
                 ),
               ),
+              if (isSelected) ...[
+                const SizedBox(width: 6),
+                Flexible(
+                  child: Text(
+                    label,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.outfit(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: context.isDark ? AppColors.accent : AppColors.primary,
+                    ),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

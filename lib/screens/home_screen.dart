@@ -5,6 +5,9 @@ import '../data/school_provider.dart';
 import '../data/textbook_data.dart';
 import '../models/textbook.dart';
 import '../utils/subject_icons.dart';
+import '../utils/ethiopian_date.dart';
+import '../services/notification_service.dart';
+import '../widgets/prayer_times_widget.dart';
 import 'grade_detail_screen.dart';
 import '../utils/book_handler.dart';
 
@@ -29,6 +32,59 @@ class HomeScreen extends StatelessWidget {
             stretch: true,
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
+            title: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.accent.withValues(alpha: 0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.auto_stories_rounded,
+                    color: AppColors.accent,
+                    size: 24,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                        style: AppTheme.outfit(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
+                      Text(
+                        '${EthiopianDayNames.today()} • ${EthiopianDate.today().formatted}',
+                        style: AppTheme.outfit(
+                          color: Colors.white60,
+                          fontSize: 11,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(
+                  provider.isDarkMode
+                      ? Icons.light_mode_rounded
+                      : Icons.dark_mode_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () => provider.toggleThemeMode(),
+              ),
+              const SizedBox(width: 8),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 decoration: const BoxDecoration(
@@ -44,48 +100,11 @@ class HomeScreen extends StatelessWidget {
                 ),
                 child: SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                color: AppColors.accent.withValues(alpha: 0.15),
-                                shape: BoxShape.circle,
-                              ),
-                              child: const Icon(
-                                Icons.auto_stories_rounded,
-                                color: AppColors.accent,
-                                size: 24,
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                'ሰንበት ትምህርት ቤት',
-                                style: AppTheme.outfit(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                provider.isDarkMode
-                                    ? Icons.light_mode_rounded
-                                    : Icons.dark_mode_rounded,
-                                color: Colors.white,
-                              ),
-                              onPressed: () => provider.toggleThemeMode(),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
                         Text(
                           '"ሕግህ ለእግሬ መብራት ነው"',
                           style: AppTheme.outfit(
@@ -103,7 +122,6 @@ class HomeScreen extends StatelessWidget {
                             letterSpacing: 1,
                           ),
                         ),
-                        const SizedBox(height: 24),
                       ],
                     ),
                   ),
@@ -169,9 +187,11 @@ class HomeScreen extends StatelessWidget {
               ),
             const SliverToBoxAdapter(child: SizedBox(height: 100)),
           ] else ...[
-            // ─── Daily Recommendation Card ────────────────────
-            SliverToBoxAdapter(
-              child: _DailyQuoteSection(),
+
+
+            // ─── Notification Permission Banner ──────────────
+            const SliverToBoxAdapter(
+              child: _NotificationBanner(),
             ),
 
             // ─── Recent Readings Row ──────────────────────────
@@ -846,4 +866,76 @@ class _RecentReadingsSection extends StatelessWidget {
   }
 }
 
+
+// ─── Notification Permission Banner ──────────────────────────────────────────
+class _NotificationBanner extends StatefulWidget {
+  const _NotificationBanner();
+
+  @override
+  State<_NotificationBanner> createState() => _NotificationBannerState();
+}
+
+class _NotificationBannerState extends State<_NotificationBanner> {
+  bool _visible = !NotificationService.isGranted;
+
+  Future<void> _enable() async {
+    final granted = await NotificationService.requestPermission();
+    if (mounted) {
+      setState(() => _visible = !granted);
+      if (granted) {
+        NotificationService.showTest();
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_visible) return const SizedBox.shrink();
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 4),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          color: AppColors.accent.withValues(alpha: 0.08),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.accent.withValues(alpha: 0.25)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.notifications_none_rounded,
+                color: AppColors.accent, size: 22),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                'የጸሎት ሰዓቶች ማሳወቂያ ለማስቻል ፍቀዱ',
+                style: AppTheme.outfit(
+                  fontSize: 12,
+                  color: AppColors.accent,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            TextButton(
+              onPressed: _enable,
+              style: TextButton.styleFrom(
+                backgroundColor: AppColors.accent,
+                foregroundColor: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Text('ፍቀዱ',
+                  style: AppTheme.outfit(
+                      fontSize: 12, fontWeight: FontWeight.w700)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
