@@ -8,8 +8,36 @@ import '../utils/subject_icons.dart';
 import '../utils/book_handler.dart';
 import 'grade_detail_screen.dart';
 
-class BookmarksScreen extends StatelessWidget {
+class BookmarksScreen extends StatefulWidget {
   const BookmarksScreen({super.key});
+  @override
+  State<BookmarksScreen> createState() => _BookmarksScreenState();
+}
+
+class _BookmarksScreenState extends State<BookmarksScreen> {
+  late final ScrollController _scrollCtrl;
+  bool _isCollapsed = false;
+
+  // expandedHeight (140) - kToolbarHeight ≈ collapse threshold
+  static const double _collapseThreshold = 140 - kToolbarHeight;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollCtrl = ScrollController();
+    _scrollCtrl.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final collapsed = _scrollCtrl.offset >= _collapseThreshold;
+    if (collapsed != _isCollapsed) setState(() => _isCollapsed = collapsed);
+  }
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +63,7 @@ class BookmarksScreen extends StatelessWidget {
           final isEmptyAll = bookmarked.isEmpty && favGradesList.isEmpty;
 
           return CustomScrollView(
+            controller: _scrollCtrl,
             slivers: [
               // ─── Header ──────────────────────────────────
               SliverAppBar(
@@ -42,7 +71,37 @@ class BookmarksScreen extends StatelessWidget {
                 pinned: true,
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                actions: [
+                title: _isCollapsed
+                    ? Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: AppColors.accent.withValues(alpha: 0.15),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.auto_stories_rounded,
+                              color: AppColors.accent,
+                              size: 24,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Text(
+                              'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                              style: AppTheme.outfit(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
+            actions: [
                   IconButton(
                     icon: Icon(
                       provider.isDarkMode

@@ -8,8 +8,35 @@ import '../utils/subject_icons.dart';
 import 'grade_detail_screen.dart';
 import 'subject_detail_screen.dart';
 
-class AboutScreen extends StatelessWidget {
+class AboutScreen extends StatefulWidget {
   const AboutScreen({super.key});
+  @override
+  State<AboutScreen> createState() => _AboutScreenState();
+}
+
+class _AboutScreenState extends State<AboutScreen> {
+  late final ScrollController _scrollCtrl;
+  bool _isCollapsed = false;
+
+  static const double _collapseThreshold = 130 - kToolbarHeight;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollCtrl = ScrollController();
+    _scrollCtrl.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final collapsed = _scrollCtrl.offset >= _collapseThreshold;
+    if (collapsed != _isCollapsed) setState(() => _isCollapsed = collapsed);
+  }
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +48,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.bg,
       body: CustomScrollView(
+        controller: _scrollCtrl,
         slivers: [
           // ─── App Bar ─────────────────────────────────────────
           SliverAppBar(
@@ -28,6 +56,36 @@ class AboutScreen extends StatelessWidget {
             pinned: true,
             backgroundColor: AppColors.primary,
             foregroundColor: Colors.white,
+            title: _isCollapsed
+                ? Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.accent.withValues(alpha: 0.15),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.auto_stories_rounded,
+                          color: AppColors.accent,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          'ደቂቀ ብርሃን ሰንበት ትምህርት ቤት',
+                          style: AppTheme.outfit(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox.shrink(),
             actions: [
               IconButton(
                 icon: Icon(
@@ -210,43 +268,6 @@ class AboutScreen extends StatelessWidget {
                     ),
                   );
                 }),
-                const SizedBox(height: 24),
-
-                // ─── How to add books tip ─────────────────────────
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: AppColors.accent.withValues(alpha: 0.06),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                        color: AppColors.accent.withValues(alpha: 0.25), width: 1),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(Icons.tips_and_updates_rounded,
-                              color: AppColors.accent, size: 18),
-                          const SizedBox(width: 8),
-                          Text(
-                            'መጻሕፍትን እንዴት ማከል ይቻላል',
-                            style: AppTheme.outfit(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                              color: context.textDarkColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      const _TipStep('1', 'ፒዲኤፍ ፋይሉን ወደ assets/books/ ይቅዱ'),
-                      const _TipStep('2', 'assets/library.json ፋይልን ይክፈቱ'),
-                      const _TipStep('3', 'ተገቢውን የክፍል ደረጃ "books" ዝርዝር ውስጥ ያክሉ'),
-                      const _TipStep('4', 'መተግበሪያውን እንደገና ያስጀምሩ'),
-                    ],
-                  ),
-                ),
               ]),
             ),
           ),
@@ -426,47 +447,6 @@ class _EmptyState extends StatelessWidget {
           style: AppTheme.outfit(fontSize: 13, color: context.textLightColor),
           textAlign: TextAlign.center,
         ),
-      ),
-    );
-  }
-}
-
-// ─── Tip Step ────────────────────────────────────────────────────────────────
-class _TipStep extends StatelessWidget {
-  final String step;
-  final String text;
-  const _TipStep(this.step, this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 20,
-            height: 20,
-            margin: const EdgeInsets.only(right: 10, top: 1),
-            decoration: const BoxDecoration(
-              color: AppColors.accent,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(
-                step,
-                style: TextStyle(
-                    color: context.surfaceColor, fontSize: 11, fontWeight: FontWeight.w700),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              text,
-              style: AppTheme.outfit(fontSize: 13, color: context.textMediumColor, height: 1.4),
-            ),
-          ),
-        ],
       ),
     );
   }
